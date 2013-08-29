@@ -20,15 +20,15 @@ Create a test case and extend from ``Matthias\SymfonyConfigTest\PhpUnit\Abstract
 ``getConfiguration()``:
 
 ```php
-    <?php
+<?php
 
-    class ConfigurationTest extends AbstractConfigurationTestCase
+class ConfigurationTest extends AbstractConfigurationTestCase
+{
+    protected function getConfiguration()
     {
-        protected function getConfiguration()
-        {
-            return new Configuration();
-        }
+        return new Configuration();
     }
+}
 ```
 
 Let's assume the ``Configuration`` class you want to test looks like this:
