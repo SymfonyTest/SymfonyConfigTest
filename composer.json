@@ -1,0 +1,25 @@
+{
+    "name": "matthiasnoback/symfony-config-test",
+    "type": "library",
+    "description": "",
+    "keywords": [],
+    "homepage": "https://github.com/matthiasnoback/SymfonyConfigTest",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Matthias Noback",
+            "email": "matthiasnoback@gmail.com",
+            "homepage": "http://php-and-symfony.matthiasnoback.nl"
+        }
+    ],
+    "require-dev": {
+        "phpunit/phpunit": "3.7.*"
+    },
+    "target-dir": "Matthias/SymfonyConfigTest",
+    "autoload": {
+        "psr-0" : { "Matthias\\SymfonyConfigTest" : "" }
+    },
+    "require": {
+        "symfony/config": "2.*"
+    }
+}
