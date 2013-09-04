@@ -1,7 +1,7 @@
 {
     "name": "matthiasnoback/symfony-config-test",
     "type": "library",
-    "description": "",
+    "description": "Library for testing user classes related to the Symfony Config Component",
     "keywords": [],
     "homepage": "https://github.com/matthiasnoback/SymfonyConfigTest",
     "license": "MIT",
