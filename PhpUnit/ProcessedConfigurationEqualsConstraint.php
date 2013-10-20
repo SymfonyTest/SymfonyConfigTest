@@ -20,9 +20,9 @@ class ProcessedConfigurationEqualsConstraint extends AbstractConfigurationConstr
     {
         $processedConfiguration = $this->processConfiguration($this->configurationValues);
 
-        $constraint = new \PHPUnit_Framework_Constraint_IsEqual($processedConfiguration);
+        $constraint = new \PHPUnit_Framework_Constraint_IsEqual($other);
 
-        return $constraint->evaluate($other, '', $returnResult);
+        return $constraint->evaluate($processedConfiguration, '', $returnResult);
     }
 
     public function toString()

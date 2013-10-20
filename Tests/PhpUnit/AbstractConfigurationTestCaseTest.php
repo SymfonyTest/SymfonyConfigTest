@@ -17,9 +17,12 @@ class AbstractConfigurationTestCaseTest extends AbstractConfigurationTestCase
      */
     public function it_can_assert_that_a_configuration_is_invalid()
     {
-        $this->assertConfigurationIsInvalid(array(
-            array() // no configuration values
-        ), 'required_value');
+        $this->assertConfigurationIsInvalid(
+            array(
+                array() // no configuration values
+            ),
+            'required_value'
+        );
     }
 
     /**
@@ -29,9 +32,11 @@ class AbstractConfigurationTestCaseTest extends AbstractConfigurationTestCase
     {
         $this->setExpectedException('\PHPUnit_Framework_ExpectationFailedException', 'invalid');
 
-        $this->assertConfigurationIsInvalid(array(
-            array('required_value' => 'some value')
-        ));
+        $this->assertConfigurationIsInvalid(
+            array(
+                array('required_value' => 'some value')
+            )
+        );
     }
 
     /**
@@ -41,12 +46,15 @@ class AbstractConfigurationTestCaseTest extends AbstractConfigurationTestCase
     {
         $value = 'some value';
 
-        $this->assertProcessedConfigurationEquals(array(
-            array(),
-            array('required_value' => $value)
-        ), array(
-            'required_value'=> $value
-        ));
+        $this->assertProcessedConfigurationEquals(
+            array(
+                array(),
+                array('required_value' => $value)
+            ),
+            array(
+                'required_value' => $value
+            )
+        );
     }
 
     /**
@@ -57,10 +65,42 @@ class AbstractConfigurationTestCaseTest extends AbstractConfigurationTestCase
         $value = 'some value';
 
         $this->setExpectedException('\PHPUnit_Framework_ExpectationFailedException', 'equal');
-        $this->assertProcessedConfigurationEquals(array(
+        $this->assertProcessedConfigurationEquals(
+            array(
+                array('required_value' => $value)
+            ),
+            array(
+                'invalid_key' => 'invalid_value'
+            )
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function it_throws_a_comparison_failed_exception_with_the_values_in_the_right_order()
+    {
+        $value = 'some value';
+
+        //$this->setExpectedException('\PHPUnit_Framework_ExpectationFailedException', 'equal');
+        $configurationValues = array(
             array('required_value' => $value)
-        ), array(
-            'invalid_key'=> 'invalid_value'
-        ));
+        );
+
+        $expectedProcessedConfigurationValues = array(
+            'invalid_key' => 'invalid_value'
+        );
+
+        try {
+            $this->assertProcessedConfigurationEquals(
+                $configurationValues,
+                $expectedProcessedConfigurationValues
+            );
+        } catch (\PHPUnit_Framework_ExpectationFailedException $exception) {
+            $this->assertSame(
+                $expectedProcessedConfigurationValues,
+                $exception->getComparisonFailure()->getExpected()
+            );
+        }
     }
 }
