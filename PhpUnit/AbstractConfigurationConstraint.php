@@ -12,6 +12,8 @@ abstract class AbstractConfigurationConstraint extends \PHPUnit_Framework_Constr
     public function __construct(ConfigurationInterface $configuration)
     {
         $this->configuration = $configuration;
+        
+        parent::__construct();
     }
 
     protected function processConfiguration(array $configurationValues)
