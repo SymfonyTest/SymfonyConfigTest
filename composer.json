@@ -15,9 +15,8 @@
     "require-dev": {
         "phpunit/phpunit": "3.7.*"
     },
-    "target-dir": "Matthias/SymfonyConfigTest",
     "autoload": {
-        "psr-0" : { "Matthias\\SymfonyConfigTest" : "" }
+        "psr-4" : { "Matthias\\SymfonyConfigTest\\" : "" }
     },
     "require": {
         "symfony/config": "2.*"
