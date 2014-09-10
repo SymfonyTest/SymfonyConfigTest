@@ -42,6 +42,32 @@ class AbstractConfigurationTestCaseTest extends AbstractConfigurationTestCase
     /**
      * @test
      */
+    public function it_can_assert_that_a_configuration_is_valid()
+    {
+        $this->assertConfigurationIsValid(
+            array(
+                array('required_value' => 'some value')
+            )
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function it_fails_when_a_configuration_is_invalid_when_it_should_have_been_valid()
+    {
+        $this->setExpectedException('\PHPUnit_Framework_ExpectationFailedException', 'valid');
+
+        $this->assertConfigurationIsValid(
+            array(
+                array()
+            )
+        );
+    }
+
+    /**
+     * @test
+     */
     public function it_can_assert_that_a_processed_configuration_matches_the_expected_array_of_values()
     {
         $value = 'some value';

@@ -36,6 +36,21 @@ abstract class AbstractConfigurationTestCase extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Assert that the given configuration values are valid.
+     *
+     * @param array $configurationValues
+     */
+    protected function assertConfigurationIsValid(array $configurationValues)
+    {
+        self::assertThat(
+            $configurationValues,
+            new ConfigurationValuesAreValidConstraint(
+                $this->getConfiguration()
+            )
+        );
+    }
+
+    /**
      * Assert that the given configuration values, when processed, will equal to the given array
      *
      * @param array $configurationValues
