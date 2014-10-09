@@ -21,16 +21,21 @@ abstract class AbstractConfigurationTestCase extends \PHPUnit_Framework_TestCase
      *
      * Optionally provide (part of) the exception message that you expect to receive.
      *
+     * When running PHPUnit >=4.3.0, you need to set useRegExp to true if you'd like
+     * to match the exception message using a regular expression.
+     *
      * @param array $configurationValues
      * @param string|null $expectedMessage
+     * @param bool $useRegExp
      */
-    protected function assertConfigurationIsInvalid(array $configurationValues, $expectedMessage = null)
+    protected function assertConfigurationIsInvalid(array $configurationValues, $expectedMessage = null, $useRegExp = false)
     {
         self::assertThat(
             $configurationValues,
             new ConfigurationValuesAreInvalidConstraint(
                 $this->getConfiguration(),
-                $expectedMessage
+                $expectedMessage,
+                $useRegExp
             )
         );
     }
