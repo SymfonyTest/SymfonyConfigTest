@@ -81,6 +81,27 @@ class ConfigurationValuesAreInvalidConstraintTest extends \PHPUnit_Framework_Tes
     /**
      * @test
      */
+    public function if_configuration_values_are_invalid_it_matches_when_exception_message_is_right_according_to_regexp()
+    {
+        $constraint = new ConfigurationValuesAreInvalidConstraint(
+            new ConfigurationWithRequiredValue(),
+            '/required[_]{1}value/',
+            true // use regular expressions
+        );
+
+        if (version_compare(\PHPUnit_Runner_Version::id(), '4.2.0', '<')) {
+            $this->setExpectedException(
+                '\InvalidArgumentException',
+                'does not support matching exception messages by regular expression'
+            );
+        }
+
+        $this->assertTrue($constraint->evaluate(array(array()), '', true));
+    }
+
+    /**
+     * @test
+     */
     public function to_string_returns_a_message()
     {
         $constraint = new ConfigurationValuesAreInvalidConstraint(
