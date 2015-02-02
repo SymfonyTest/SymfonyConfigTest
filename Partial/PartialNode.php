@@ -20,15 +20,19 @@ class PartialNode
      */
     public static function excludeEverythingNotInBreadcrumbPath(ArrayNode $node, $breadcrumbPath)
     {
-        $breadcrumbPath = explode('.', $breadcrumbPath);
+        if ($breadcrumbPath === null) {
+            return;
+        }
 
-        self::excludeEverythingNotInPath($node, $breadcrumbPath);
+        $path = explode('.', $breadcrumbPath);
+
+        self::excludeEverythingNotInPath($node, $path);
     }
 
     /**
      * @param array $path
      */
-    public static function excludeEverythingNotInPath(ArrayNode $node, array $path)
+    public static function excludeEverythingNotInPath(ArrayNode $node, array $path = array())
     {
         if (empty($path)) {
             return;

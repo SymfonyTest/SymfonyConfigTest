@@ -10,9 +10,13 @@ class ConfigurationValuesAreInvalidConstraint extends AbstractConfigurationConst
     private $expectedMessage;
     private $useRegExp;
 
-    public function __construct(ConfigurationInterface $configuration, $expectedMessage = null, $useRegExp = false)
-    {
-        parent::__construct($configuration);
+    public function __construct(
+        ConfigurationInterface $configuration,
+        $expectedMessage = null,
+        $useRegExp = false,
+        $breadcrumbPath = null
+    ) {
+        parent::__construct($configuration, $breadcrumbPath);
 
         $this->expectedMessage = $expectedMessage;
         $this->useRegExp = $useRegExp;
@@ -40,7 +44,7 @@ class ConfigurationValuesAreInvalidConstraint extends AbstractConfigurationConst
         $toString = 'is invalid for the given configuration';
 
         if ($this->expectedMessage !== null) {
-            $toString .= ' (expected exception message: '.$this->expectedMessage.')';
+            $toString .= ' (expected exception message: ' . $this->expectedMessage . ')';
         }
 
         return $toString;

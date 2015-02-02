@@ -8,12 +8,15 @@ class ProcessedConfigurationEqualsConstraint extends AbstractConfigurationConstr
 {
     private $configurationValues;
 
-    public function __construct(ConfigurationInterface $configuration, array $configurationValues)
-    {
+    public function __construct(
+        ConfigurationInterface $configuration,
+        array $configurationValues,
+        $breadcrumbPath = null
+    ) {
         $this->validateConfigurationValuesArray($configurationValues);
         $this->configurationValues = $configurationValues;
 
-        parent::__construct($configuration);
+        parent::__construct($configuration, $breadcrumbPath);
     }
 
     public function evaluate($other, $description = '', $returnResult = false)

@@ -30,7 +30,7 @@ class PartialNodeTest extends \PHPUnit_Framework_TestCase
         $node = $treeBuilder->buildTree();
         /** @var ArrayNode $node */
 
-        PartialNode::excludeEverythingNotInPath($node, ['node_2']);
+        PartialNode::excludeEverythingNotInPath($node, array('node_2'));
 
         $this->nodeOnlyHasChild($node, 'node_2');
     }
@@ -67,7 +67,7 @@ class PartialNodeTest extends \PHPUnit_Framework_TestCase
         $node = $treeBuilder->buildTree();
         /** @var ArrayNode $node */
 
-        PartialNode::excludeEverythingNotInPath($node, ['node_1', 'node_1_b']);
+        PartialNode::excludeEverythingNotInPath($node, array('node_1', 'node_1_b'));
 
         $node1 = $this->nodeOnlyHasChild($node, 'node_1');
         $this->nodeOnlyHasChild($node1, 'node_1_b');
@@ -92,7 +92,7 @@ class PartialNodeTest extends \PHPUnit_Framework_TestCase
             'Matthias\SymfonyConfigTest\Partial\Exception\UndefinedChildNode',
             'Undefined child node "non_existing_node" (the part of the path that was successful: "root.sub_node")'
         );
-        PartialNode::excludeEverythingNotInPath($node, ['sub_node', 'non_existing_node']);
+        PartialNode::excludeEverythingNotInPath($node, array('sub_node', 'non_existing_node'));
     }
 
     /**
@@ -114,7 +114,7 @@ class PartialNodeTest extends \PHPUnit_Framework_TestCase
             'Matthias\SymfonyConfigTest\Partial\Exception\ChildIsNotAnArrayNode',
             'Child node "scalar_node" is not an array node (current path: "root.sub_node")'
         );
-        PartialNode::excludeEverythingNotInPath($node, ['sub_node', 'scalar_node']);
+        PartialNode::excludeEverythingNotInPath($node, array('sub_node', 'scalar_node'));
     }
 
     private function nodeOnlyHasChild(ArrayNode $node, $nodeName)

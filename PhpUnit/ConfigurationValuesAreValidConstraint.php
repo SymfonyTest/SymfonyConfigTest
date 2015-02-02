@@ -7,9 +7,9 @@ use Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
 
 class ConfigurationValuesAreValidConstraint extends AbstractConfigurationConstraint
 {
-    public function __construct(ConfigurationInterface $configuration)
+    public function __construct(ConfigurationInterface $configuration, $breadcrumbPath = null)
     {
-        parent::__construct($configuration);
+        parent::__construct($configuration, $breadcrumbPath);
     }
 
     public function matches($other)

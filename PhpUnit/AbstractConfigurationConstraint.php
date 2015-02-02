@@ -2,25 +2,27 @@
 
 namespace Matthias\SymfonyConfigTest\PhpUnit;
 
+use Matthias\SymfonyConfigTest\Partial\PartialProcessor;
 use SebastianBergmann\Exporter\Exporter;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
-use Symfony\Component\Config\Definition\Processor;
 
 abstract class AbstractConfigurationConstraint extends \PHPUnit_Framework_Constraint
 {
     protected $configuration;
+    protected $breadcrumbPath;
 
-    public function __construct(ConfigurationInterface $configuration)
+    public function __construct(ConfigurationInterface $configuration, $breadcrumbPath = null)
     {
         $this->configuration = $configuration;
+        $this->breadcrumbPath = $breadcrumbPath;
         $this->exporter = new Exporter();
     }
 
     protected function processConfiguration(array $configurationValues)
     {
-        $processor = new Processor();
+        $processor = new PartialProcessor();
 
-        return $processor->processConfiguration($this->configuration, $configurationValues);
+        return $processor->processConfiguration($this->configuration, $this->breadcrumbPath, $configurationValues);
     }
 
     protected function validateConfigurationValuesArray($configurationValues)
