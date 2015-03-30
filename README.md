@@ -16,6 +16,27 @@ Using Composer:
 
 ## Usage
 
+### php 5.4 and up
+
+Create a test case and use the trait from ``Matthias\SymfonyConfigTest\PhpUnit\ConfigurationTestCaseTrait``. 
+Then implement ``getConfiguration()``:
+
+```php
+<?php
+
+class ConfigurationTest extends \PHPUnit_Framework_TestCase
+{
+    use ConfigurationTestCaseTrait;
+
+    protected function getConfiguration()
+    {
+        return new Configuration();
+    }
+}
+```
+
+### php 5.3
+
 Create a test case and extend from ``Matthias\SymfonyConfigTest\PhpUnit\AbstractConfigurationTestCase``. Then implement
 ``getConfiguration()``:
 
@@ -66,8 +87,10 @@ When you provide an empty array as the values for this configuration, you would 
 ```php
 <?php
 
-class ConfigurationTest extends AbstractConfigurationTestCase
+class ConfigurationTest extends \PHPUnit_Framework_TestCase
 {
+    use ConfigurationTestCaseTrait;
+
     public function testValuesAreInvalidIfRequiredValueIsNotProvided()
     {
         $this->assertConfigurationIsInvalid(
@@ -85,8 +108,10 @@ You may also want to verify that after processing an array of configuration valu
 ```php
 <?php
 
-class ConfigurationTest extends AbstractConfigurationTestCase
+class ConfigurationTest extends \PHPUnit_Framework_TestCase
 {
+    use ConfigurationTestCaseTrait;
+
     public function testProcessedValueContainsRequiredValue()
     {
         $this->assertProcessedConfigurationEquals(array(

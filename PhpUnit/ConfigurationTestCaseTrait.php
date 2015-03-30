@@ -3,13 +3,10 @@
 namespace Matthias\SymfonyConfigTest\PhpUnit;
 
 /**
- * Extend your test case from this abstract class to test a class that implements
- * Symfony\Component\Config\Definition\ConfigurationInterface
- *
- * @deprecated only use this class if you're still running php 5.3. Use
- * Matthias\SymfonyConfigTest\PhpUnit\ConfigurationTestCaseTrait instead
+ * Add this trait to your Test Case to add the ability of testing your configuration
+ * which should implement Symfony\Component\Config\Definition\ConfigurationInterface
  */
-abstract class AbstractConfigurationTestCase extends \PHPUnit_Framework_TestCase
+trait ConfigurationTestCaseTrait
 {
     /**
      * Return the instance of ConfigurationInterface that should be used by the
@@ -33,7 +30,7 @@ abstract class AbstractConfigurationTestCase extends \PHPUnit_Framework_TestCase
      */
     protected function assertConfigurationIsInvalid(array $configurationValues, $expectedMessage = null, $useRegExp = false)
     {
-        self::assertThat(
+        \PHPUnit_Framework_TestCase::assertThat(
             $configurationValues,
             new ConfigurationValuesAreInvalidConstraint(
                 $this->getConfiguration(),
@@ -50,7 +47,7 @@ abstract class AbstractConfigurationTestCase extends \PHPUnit_Framework_TestCase
      */
     protected function assertConfigurationIsValid(array $configurationValues)
     {
-        self::assertThat(
+        \PHPUnit_Framework_TestCase::assertThat(
             $configurationValues,
             new ConfigurationValuesAreValidConstraint(
                 $this->getConfiguration()
@@ -68,7 +65,7 @@ abstract class AbstractConfigurationTestCase extends \PHPUnit_Framework_TestCase
         array $configurationValues,
         array $expectedProcessedConfiguration
     ) {
-        self::assertThat(
+        \PHPUnit_Framework_TestCase::assertThat(
             $expectedProcessedConfiguration,
             new ProcessedConfigurationEqualsConstraint(
                 $this->getConfiguration(),
