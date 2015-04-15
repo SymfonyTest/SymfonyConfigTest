@@ -16,9 +16,7 @@ Using Composer:
 
 ## Usage
 
-### php 5.4 and up
-
-Create a test case and use the trait from ``Matthias\SymfonyConfigTest\PhpUnit\ConfigurationTestCaseTrait``. 
+Create a test case and use the trait from ``Matthias\SymfonyConfigTest\PhpUnit\ConfigurationTestCaseTrait``.
 Then implement ``getConfiguration()``:
 
 ```php
@@ -28,23 +26,6 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
 {
     use ConfigurationTestCaseTrait;
 
-    protected function getConfiguration()
-    {
-        return new Configuration();
-    }
-}
-```
-
-### php 5.3
-
-Create a test case and extend from ``Matthias\SymfonyConfigTest\PhpUnit\AbstractConfigurationTestCase``. Then implement
-``getConfiguration()``:
-
-```php
-<?php
-
-class ConfigurationTest extends AbstractConfigurationTestCase
-{
     protected function getConfiguration()
     {
         return new Configuration();

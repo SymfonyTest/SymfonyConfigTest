@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## v2.0.0
 
 - Use a breadcrumb path to test only one particular part of the configuration node tree.
 

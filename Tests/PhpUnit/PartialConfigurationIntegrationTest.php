@@ -2,11 +2,13 @@
 
 namespace Matthias\SymfonyConfigTest\Tests;
 
-use Matthias\SymfonyConfigTest\PhpUnit\AbstractConfigurationTestCase;
+use Matthias\SymfonyConfigTest\PhpUnit\ConfigurationTestCaseTrait;
 use Matthias\SymfonyConfigTest\Tests\PhpUnit\Fixtures\ConfigurationWithMultipleArrayKeys;
 
-class PartialConfigurationIntegrationTest extends AbstractConfigurationTestCase
+class PartialConfigurationIntegrationTest extends \PHPUnit_Framework_TestCase
 {
+    use ConfigurationTestCaseTrait;
+
     protected function getConfiguration()
     {
         return new ConfigurationWithMultipleArrayKeys();
