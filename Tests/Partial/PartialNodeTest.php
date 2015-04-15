@@ -119,7 +119,10 @@ class PartialNodeTest extends \PHPUnit_Framework_TestCase
 
     private function nodeOnlyHasChild(ArrayNode $node, $nodeName)
     {
-        $children = $node->getChildren();
+        $property = new \ReflectionProperty($node, 'children');
+        $property->setAccessible(true);
+        $children = $property->getValue($node);
+
         $this->assertCount(1, $children);
         $firstChild = reset($children);
         $this->assertSame($nodeName, $firstChild->getName());
