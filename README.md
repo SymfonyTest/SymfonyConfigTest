@@ -175,7 +175,9 @@ public function processed_configuration_for_array_node_1()
             'array_node_1' => array(
                 'required_value_1' => 'final value'
             )
-        )
+        ),
+        // the path of the nodes you want to focus on in this test:
+        'array_node_1'
     );
 }
 ```
@@ -183,4 +185,4 @@ public function processed_configuration_for_array_node_1()
 This would trigger no validation errors for any value in the `array_node_2` branch.
 
 Note that the `$breadcrumbPath` can be even more specific, e.g. `"doctrine.orm"` (which would skip configuration
-processing for branch `"doctrine.dbal"`).
+processing for branch `"doctrine.dbal"`, etc.).
