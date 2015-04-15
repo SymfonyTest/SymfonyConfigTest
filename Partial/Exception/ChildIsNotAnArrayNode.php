@@ -12,7 +12,7 @@ class ChildIsNotAnArrayNode extends InvalidNodeNavigation
             sprintf(
                 'Child node "%s" is not an array node (current path: "%s")',
                 $nodeName,
-                self::renderTravelledPath($parentNode)
+                $parentNode->getPath()
             )
         );
     }

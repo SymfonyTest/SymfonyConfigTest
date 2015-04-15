@@ -12,7 +12,7 @@ class UndefinedChildNode extends InvalidNodeNavigation
             sprintf(
                 'Undefined child node "%s" (the part of the path that was successful: "%s")',
                 $childNodeName,
-                self::renderTravelledPath($parentNode)
+                $parentNode->getPath()
             )
         );
     }
