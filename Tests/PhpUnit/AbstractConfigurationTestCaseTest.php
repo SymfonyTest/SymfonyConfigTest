@@ -3,13 +3,16 @@
 namespace Matthias\SymfonyConfigTest\Tests;
 
 use Matthias\SymfonyConfigTest\PhpUnit\AbstractConfigurationTestCase;
-use Matthias\SymfonyConfigTest\Tests\PhpUnit\Fixtures\ConfigurationWithMultipleArrayKeys;
+use Matthias\SymfonyConfigTest\Tests\PhpUnit\Fixtures\ConfigurationWithRequiredValue;
 
-class PartialConfigurationIntegrationTest extends AbstractConfigurationTestCase
+/**
+ * @deprecated should be removed once the minimum php version is elevated to at least 5.4
+ */
+class AbstractConfigurationTestCaseTest extends AbstractConfigurationTestCase
 {
     protected function getConfiguration()
     {
-        return new ConfigurationWithMultipleArrayKeys();
+        return new ConfigurationWithRequiredValue();
     }
 
     /**
@@ -17,12 +20,11 @@ class PartialConfigurationIntegrationTest extends AbstractConfigurationTestCase
      */
     public function it_can_assert_that_a_configuration_is_invalid()
     {
-        $this->assertPartialConfigurationIsInvalid(
+        $this->assertConfigurationIsInvalid(
             array(
                 array() // no configuration values
             ),
-            'array_node_1',
-            'array_node_1'
+            'required_value'
         );
     }
 
@@ -33,15 +35,10 @@ class PartialConfigurationIntegrationTest extends AbstractConfigurationTestCase
     {
         $this->setExpectedException('\PHPUnit_Framework_ExpectationFailedException', 'invalid');
 
-        $this->assertPartialConfigurationIsInvalid(
+        $this->assertConfigurationIsInvalid(
             array(
-                array(
-                    'array_node_1' => array(
-                        'required_value_1' => 'some value'
-                    )
-                )
-            ),
-            'array_node_1'
+                array('required_value' => 'some value')
+            )
         );
     }
 
@@ -52,13 +49,8 @@ class PartialConfigurationIntegrationTest extends AbstractConfigurationTestCase
     {
         $this->assertConfigurationIsValid(
             array(
-                array(
-                    'array_node_1' => array(
-                        'required_value_1' => 'some value'
-                    )
-                )
-            ),
-            'array_node_1'
+                array('required_value' => 'some value')
+            )
         );
     }
 
@@ -72,8 +64,7 @@ class PartialConfigurationIntegrationTest extends AbstractConfigurationTestCase
         $this->assertConfigurationIsValid(
             array(
                 array()
-            ),
-            'array_node_1'
+            )
         );
     }
 
@@ -87,19 +78,11 @@ class PartialConfigurationIntegrationTest extends AbstractConfigurationTestCase
         $this->assertProcessedConfigurationEquals(
             array(
                 array(),
-                array(
-                    'array_node_1' => array(
-                        'required_value_1' => $value
-                    )
-                )
+                array('required_value' => $value)
             ),
             array(
-                'array_node_1' => array(
-
-                    'required_value_1' => $value
-                )
-            ),
-            'array_node_1'
+                'required_value' => $value
+            )
         );
     }
 
@@ -113,16 +96,11 @@ class PartialConfigurationIntegrationTest extends AbstractConfigurationTestCase
         $this->setExpectedException('\PHPUnit_Framework_ExpectationFailedException', 'equal');
         $this->assertProcessedConfigurationEquals(
             array(
-                array(
-                    'array_node_1' => array(
-                        'required_value_1' => $value
-                    )
-                )
+                array('required_value' => $value)
             ),
             array(
                 'invalid_key' => 'invalid_value'
-            ),
-            'array_node_1'
+            )
         );
     }
 
@@ -133,12 +111,9 @@ class PartialConfigurationIntegrationTest extends AbstractConfigurationTestCase
     {
         $value = 'some value';
 
+        //$this->setExpectedException('\PHPUnit_Framework_ExpectationFailedException', 'equal');
         $configurationValues = array(
-            array(
-                'array_node_1' => array(
-                    'required_value_1' => $value
-                )
-            )
+            array('required_value' => $value)
         );
 
         $expectedProcessedConfigurationValues = array(
@@ -148,8 +123,7 @@ class PartialConfigurationIntegrationTest extends AbstractConfigurationTestCase
         try {
             $this->assertProcessedConfigurationEquals(
                 $configurationValues,
-                $expectedProcessedConfigurationValues,
-                'array_node_1'
+                $expectedProcessedConfigurationValues
             );
         } catch (\PHPUnit_Framework_ExpectationFailedException $exception) {
             $this->assertSame(

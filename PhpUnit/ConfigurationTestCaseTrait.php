@@ -41,74 +41,35 @@ trait ConfigurationTestCaseTrait
     }
 
     /**
-     * Assert that the given configuration values are invalid.
-     *
-     * Optionally provide (part of) the exception message that you expect to receive.
-     *
-     * When running PHPUnit >=4.3.0, you need to set useRegExp to true if you'd like
-     * to match the exception message using a regular expression.
-     *
-     * @param array $configurationValues
-     * @param string $breadcrumbPath The path that should be validated, e.g. "doctrine.orm"
-     * @param string|null $expectedMessage
-     * @param bool $useRegExp
-     */
-    protected function assertPartialConfigurationIsInvalid(
-        array $configurationValues,
-        $breadcrumbPath,
-        $expectedMessage = null,
-        $useRegExp = false
-    ) {
-        \PHPUnit_Framework_TestCase::assertThat(
-            $configurationValues,
-            new ConfigurationValuesAreInvalidConstraint(
-                $this->getConfiguration(),
-                $expectedMessage,
-                $useRegExp,
-                $breadcrumbPath
-            )
-        );
-    }
-
-    /**
      * Assert that the given configuration values are valid.
      *
-     * Optionally provide the part of the configuration that you want to test, e.g. "doctrine.orm"
-     *
      * @param array $configurationValues
-     * @param string|null $breadcrumbPath
      */
-    protected function assertConfigurationIsValid(array $configurationValues, $breadcrumbPath = null)
+    protected function assertConfigurationIsValid(array $configurationValues)
     {
         \PHPUnit_Framework_TestCase::assertThat(
             $configurationValues,
             new ConfigurationValuesAreValidConstraint(
-                $this->getConfiguration(),
-                $breadcrumbPath
+                $this->getConfiguration()
             )
         );
     }
 
     /**
-     * Assert that the given configuration values, when processed, will equal to the given array.
-     *
-     * Optionally provide the part of the configuration that you want to test, e.g. "doctrine.orm"
+     * Assert that the given configuration values, when processed, will equal to the given array
      *
      * @param array $configurationValues
      * @param array $expectedProcessedConfiguration
-     * @param string|null $breadcrumbPath
      */
     protected function assertProcessedConfigurationEquals(
         array $configurationValues,
-        array $expectedProcessedConfiguration,
-        $breadcrumbPath = null
+        array $expectedProcessedConfiguration
     ) {
         \PHPUnit_Framework_TestCase::assertThat(
             $expectedProcessedConfiguration,
             new ProcessedConfigurationEqualsConstraint(
                 $this->getConfiguration(),
-                $configurationValues,
-                $breadcrumbPath
+                $configurationValues
             )
         );
     }

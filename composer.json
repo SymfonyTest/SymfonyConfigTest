@@ -20,7 +20,7 @@
         "psr-4" : { "Matthias\\SymfonyConfigTest\\" : "" }
     },
     "require": {
-        "php": ">=5.4",
-        "symfony/config": "2.6.*"
+        "php": ">=5.3",
+        "symfony/config": "2.*"
     }
 }
