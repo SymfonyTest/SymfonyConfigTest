@@ -82,7 +82,7 @@ class ConfigurationWithRequiredValue implements ConfigurationInterface
 }
 ```
 
-When you provide an empty array as the values for this configuration, you would expect an exception since the
+When you provide an empty array as the value for this configuration, you would expect an exception since the
 ``required_value`` node is required. You can assert that a given set of configuration values is invalid using the
 ``assertConfigurationIsInvalid()`` method:
 
