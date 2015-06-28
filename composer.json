@@ -12,15 +12,13 @@
             "homepage": "http://php-and-symfony.matthiasnoback.nl"
         }
     ],
-    "require-dev": {
-        "phpunit/phpunit": ">=3.7",
-        "sebastian/exporter": "1.*"
-    },
     "autoload": {
         "psr-4" : { "Matthias\\SymfonyConfigTest\\" : "" }
     },
     "require": {
         "php": ">=5.3",
+        "phpunit/phpunit": ">=3.7",
+        "sebastian/exporter": "1.*",
         "symfony/config": "2.*"
     }
 }
