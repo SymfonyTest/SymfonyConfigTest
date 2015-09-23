@@ -13,10 +13,8 @@
         }
     ],
     "require": {
+        "phpunit/phpunit": ">=3.7",
         "sebastian/exporter": "1.*"
-    },
-    "require-dev": {
-        "phpunit/phpunit": ">=3.7"
     },
     "autoload": {
         "psr-4" : { "Matthias\\SymfonyConfigTest\\" : "" }
