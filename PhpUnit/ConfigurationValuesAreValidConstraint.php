@@ -12,7 +12,7 @@ class ConfigurationValuesAreValidConstraint extends AbstractConfigurationConstra
         parent::__construct($configuration, $breadcrumbPath);
     }
 
-    public function matches($other)
+    public function evaluate($other, $description = '', $returnResult = false)
     {
         $this->validateConfigurationValuesArray($other);
 
@@ -22,9 +22,16 @@ class ConfigurationValuesAreValidConstraint extends AbstractConfigurationConstra
             $this->processConfiguration($other);
         } catch (InvalidConfigurationException $exception) {
             $success = false;
+            $description = empty($description) ? $exception->getMessage() : $description."\n".$exception->getMessage();
         }
 
-        return $success;
+        if ($returnResult) {
+            return $success;
+        }
+
+        if (!$success) {
+            $this->fail($other, $description);
+        }
     }
 
     public function toString()

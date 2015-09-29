@@ -59,7 +59,7 @@ class AbstractConfigurationTestCaseTest extends AbstractConfigurationTestCase
      */
     public function it_fails_when_a_configuration_is_invalid_when_it_should_have_been_valid()
     {
-        $this->setExpectedException('\PHPUnit_Framework_ExpectationFailedException', 'valid');
+        $this->setExpectedException('\PHPUnit_Framework_ExpectationFailedException', 'The child node "required_value" at path "root" must be configured.');
 
         $this->assertConfigurationIsValid(
             array(
