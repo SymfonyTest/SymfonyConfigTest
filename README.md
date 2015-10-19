@@ -12,7 +12,7 @@ validity of the resulting config node tree, this library provides a PHPUnit test
 
 Using Composer:
 
-    php composer.phar require --dev matthiasnoback/symfony-config-test 0.*
+    php composer.phar require --dev matthiasnoback/symfony-config-test
 
 ## Usage
 
