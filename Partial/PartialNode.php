@@ -39,12 +39,7 @@ class PartialNode
         }
 
         $nextNodeName = array_shift($path);
-
         $nextNode = self::childNode($node, $nextNodeName);
-
-        if (!($nextNode instanceof ArrayNode)) {
-            throw new ChildIsNotAnArrayNode($node, $nextNodeName);
-        }
 
         $children = self::nodeChildrenProperty()->getValue($node);
         foreach ($children as $name => $child) {
@@ -53,6 +48,14 @@ class PartialNode
             }
         }
         self::nodeChildrenProperty()->setValue($node, $children);
+
+        if (!($nextNode instanceof ArrayNode)) {
+            if (!empty($path)) {
+                throw new ChildIsNotAnArrayNode($node, $nextNodeName);
+            }
+
+            return;
+        }
 
         self::excludeEverythingNotInPath($nextNode, $path);
     }

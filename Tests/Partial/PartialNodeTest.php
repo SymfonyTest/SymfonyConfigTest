@@ -76,6 +76,33 @@ class PartialNodeTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
+    public function it_strips_children_when_leaf_node_is_not_an_array()
+    {
+        $treeBuilder = new TreeBuilder();
+        $root = $treeBuilder->root('root');
+        $root
+            ->children()
+                ->arrayNode('node_1')
+                    ->children()
+                        ->scalarNode('node_1_scalar_node')
+                        ->end()
+                    ->end()
+                ->end()
+                ->scalarNode('node_2')
+                ->end()
+                ->scalarNode('node_3');
+
+        $node = $treeBuilder->buildTree();
+        /** @var ArrayNode $node */
+
+        PartialNode::excludeEverythingNotInPath($node, array('node_3'));
+
+        $this->nodeOnlyHasChild($node, 'node_3');
+    }
+
+    /**
+     * @test
+     */
     public function it_fails_when_a_requested_child_node_does_not_exist()
     {
         $treeBuilder = new TreeBuilder();
@@ -98,7 +125,7 @@ class PartialNodeTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function it_fails_when_a_requested_child_node_is_no_array_node_itself()
+    public function it_fails_when_a_requested_child_node_is_no_array_node_itself_and_path_not_empty()
     {
         $treeBuilder = new TreeBuilder();
         $root = $treeBuilder->root('root');
@@ -114,7 +141,7 @@ class PartialNodeTest extends \PHPUnit_Framework_TestCase
             'Matthias\SymfonyConfigTest\Partial\Exception\ChildIsNotAnArrayNode',
             'Child node "scalar_node" is not an array node (current path: "root.sub_node")'
         );
-        PartialNode::excludeEverythingNotInPath($node, array('sub_node', 'scalar_node'));
+        PartialNode::excludeEverythingNotInPath($node, array('sub_node', 'scalar_node', 'extra_node'));
     }
 
     private function nodeOnlyHasChild(ArrayNode $node, $nodeName)
