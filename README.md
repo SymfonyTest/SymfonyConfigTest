@@ -205,3 +205,5 @@ This would trigger no validation errors for any value in the `array_node_2` bran
 
 Note that the `$breadcrumbPath` can be even more specific, e.g. `"doctrine.orm"` (which would skip configuration
 processing for branch `"doctrine.dbal"`, etc.).
+
+Also note that you can only traverse over array nodes using the `.` in the breadcrumb path. The last part of the breadcrumb path can be any other type of node.
