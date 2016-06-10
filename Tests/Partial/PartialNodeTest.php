@@ -4,7 +4,9 @@ namespace Matthias\SymfonyConfigTest\Tests\Partial;
 
 use Matthias\SymfonyConfigTest\Partial\PartialNode;
 use Symfony\Component\Config\Definition\ArrayNode;
+use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
+use Symfony\Component\Config\Definition\PrototypedArrayNode;
 
 class PartialNodeTest extends \PHPUnit_Framework_TestCase
 {
@@ -98,6 +100,38 @@ class PartialNodeTest extends \PHPUnit_Framework_TestCase
         PartialNode::excludeEverythingNotInPath($node, array('node_3'));
 
         $this->nodeOnlyHasChild($node, 'node_3');
+    }
+
+    /**
+     * @test
+     */
+    public function it_does_not_crash_on_prototypes()
+    {
+        $treeBuilder = new TreeBuilder();
+        /** @var ArrayNodeDefinition $root */
+        $root = $treeBuilder->root('root');
+        $root
+            ->prototype('array')
+                ->children()
+                    ->arrayNode('node_1')
+                        ->children()
+                            ->scalarNode('node_1_scalar_node')->end()
+                        ->end()
+                    ->end()
+                    ->arrayNode('node_2')
+                        ->children()
+                            ->scalarNode('node_2_scalar_node')
+        ;
+
+        /** @var PrototypedArrayNode $node */
+        $node = $treeBuilder->buildTree();
+
+        /** @var ArrayNode $prototypeNode */
+        $prototypeNode = $node->getPrototype();
+
+        PartialNode::excludeEverythingNotInPath($node, array('*', 'node_1'));
+
+        $this->nodeOnlyHasChild($prototypeNode, 'node_1');
     }
 
     /**

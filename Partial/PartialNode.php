@@ -5,10 +5,20 @@ namespace Matthias\SymfonyConfigTest\Partial;
 use Matthias\SymfonyConfigTest\Partial\Exception\ChildIsNotAnArrayNode;
 use Matthias\SymfonyConfigTest\Partial\Exception\UndefinedChildNode;
 use Symfony\Component\Config\Definition\ArrayNode;
+use Symfony\Component\Config\Definition\NodeInterface;
+use Symfony\Component\Config\Definition\PrototypedArrayNode;
 
 class PartialNode
 {
+    /**
+     * @var \ReflectionProperty
+     */
     private static $nodeChildrenProperty;
+
+    /**
+     * @var \ReflectionProperty
+     */
+    private static $nodePrototypeProperty;
 
     /**
      * Provide an ArrayNode instance (e.g. the root node created by a TreeBuilder) and a path that is relevant to you,
@@ -60,8 +70,18 @@ class PartialNode
         self::excludeEverythingNotInPath($nextNode, $path);
     }
 
+    /**
+     * @param ArrayNode $node
+     * @param string $childNodeName
+     *
+     * @return NodeInterface
+     */
     private static function childNode(ArrayNode $node, $childNodeName)
     {
+        if ($node instanceof PrototypedArrayNode && '*' === $childNodeName) {
+            return self::nodePrototypeProperty()->getValue($node);
+        }
+
         $children = self::nodeChildrenProperty()->getValue($node);
 
         if (!isset($children[$childNodeName])) {
@@ -74,6 +94,9 @@ class PartialNode
         return $children[$childNodeName];
     }
 
+    /**
+     * @return \ReflectionProperty
+     */
     private static function nodeChildrenProperty()
     {
         if (!isset(self::$nodeChildrenProperty)) {
@@ -85,5 +108,21 @@ class PartialNode
         }
 
         return self::$nodeChildrenProperty;
+    }
+
+    /**
+     * @return \ReflectionProperty
+     */
+    private static function nodePrototypeProperty()
+    {
+        if (!isset(self::$nodePrototypeProperty)) {
+            self::$nodePrototypeProperty = new \ReflectionProperty(
+                'Symfony\Component\Config\Definition\PrototypedArrayNode',
+                'prototype'
+            );
+            self::$nodePrototypeProperty->setAccessible(true);
+        }
+
+        return self::$nodePrototypeProperty;
     }
 }
