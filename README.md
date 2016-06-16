@@ -207,3 +207,64 @@ Note that the `$breadcrumbPath` can be even more specific, e.g. `"doctrine.orm"`
 processing for branch `"doctrine.dbal"`, etc.).
 
 Also note that you can only traverse over array nodes using the `.` in the breadcrumb path. The last part of the breadcrumb path can be any other type of node.
+
+#### Test a subset of the prototyped configuration tree
+
+You can traverse through prototype array nodes using `*` as its name in the breadcrumb path.
+
+```php
+<?php
+
+use Symfony\Component\Config\Definition\Builder\TreeBuilder;
+use Symfony\Component\Config\Definition\ConfigurationInterface;
+
+class PrototypedConfiguration implements ConfigurationInterface
+{
+    public function getConfigTreeBuilder()
+    {
+        $treeBuilder = new TreeBuilder();
+
+        $rootNode = $treeBuilder->root('root');
+        $rootNode
+            ->children()
+                ->arrayNode('array_node')
+                    ->useAttributeAsKey('name')
+                    ->prototype('array')
+                        ->children()
+                            ->scalarNode('default_value')->cannotBeEmpty()->defaultValue('foobar')->end()
+                            ->scalarNode('required_value')->isRequired()->end()
+                        ->end()
+                    ->end()
+                ->end()
+            ->end();
+
+        return $treeBuilder;
+    }
+}
+```
+
+If you want to test whether `default_value` is set to `foobar` by default, but don't want the test to be affected by
+requirements on `required_value` node, you can define its path as `array_node.*.default_value`, for example:
+
+```php
+/**
+ * @test
+ */
+public function processed_configuration_for_array_node_1()
+{
+    $this->assertProcessedConfigurationEquals(
+        array(
+            array('array_node' => array('prototype_name' => null)),
+        ),
+        array(
+            'array_node' => array(
+                'prototype_name' => array(
+                    'default_value' => 'foobar'
+                )
+            )
+        ),
+        // the path of the nodes you want to focus on in this test:
+        'array_node.*.default_value'
+    );
+}
+```
