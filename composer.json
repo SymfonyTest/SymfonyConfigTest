@@ -15,7 +15,7 @@
     "require": {
         "php": "^5.3|^7.0",
 
-        "sebastian/exporter": "^1.0",
+        "sebastian/exporter": "^1.0|^2.0",
         "symfony/config": "^2.3|^3.0"
     },
     "require-dev": {
