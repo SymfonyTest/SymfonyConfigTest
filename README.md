@@ -187,8 +187,8 @@ public function processed_configuration_for_array_node_1()
 {
     $this->assertProcessedConfigurationEquals(
         array(
-            array('array_node_1' => array('required_value_1' => 'original value'),
-            array('array_node_1' => array('required_value_1' => 'final value')
+            array('array_node_1' => array('required_value_1' => 'original value')),
+            array('array_node_1' => array('required_value_1' => 'final value'))
         ),
         array(
             'array_node_1' => array(
