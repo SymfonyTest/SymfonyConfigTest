@@ -10,24 +10,24 @@ class ConfigurationValuesAreValidConstraintTest extends \PHPUnit_Framework_TestC
 {
     /**
      * @test
+     * @expectedException \InvalidArgumentException
+     * @expectedExceptionMessage array
      */
     public function if_configuration_values_is_no_array_it_fails()
     {
         $constraint = new ConfigurationValuesAreValidConstraint(new AlwaysValidConfiguration());
-
-        $this->setExpectedException('\InvalidArgumentException', 'array');
 
         $constraint->evaluate('not an array');
     }
 
     /**
      * @test
+     * @expectedException \InvalidArgumentException
+     * @expectedExceptionMessage array
      */
     public function if_configuration_values_is_no_array_of_arrays_it_fails()
     {
         $constraint = new ConfigurationValuesAreValidConstraint(new AlwaysValidConfiguration());
-
-        $this->setExpectedException('\InvalidArgumentException', 'array');
 
         $constraint->evaluate(array('not an array'));
     }
