@@ -28,11 +28,11 @@ class PartialConfigurationIntegrationTest extends AbstractConfigurationTestCase
 
     /**
      * @test
+     * @expectedException \PHPUnit_Framework_ExpectationFailedException
+     * @expectedExceptionMessage invalid
      */
     public function it_fails_when_a_configuration_is_valid_when_it_should_have_been_invalid()
     {
-        $this->setExpectedException('\PHPUnit_Framework_ExpectationFailedException', 'invalid');
-
         $this->assertPartialConfigurationIsInvalid(
             array(
                 array(
@@ -64,11 +64,11 @@ class PartialConfigurationIntegrationTest extends AbstractConfigurationTestCase
 
     /**
      * @test
+     * @expectedException \PHPUnit_Framework_ExpectationFailedException
+     * @expectedExceptionMessage valid
      */
     public function it_fails_when_a_configuration_is_invalid_when_it_should_have_been_valid()
     {
-        $this->setExpectedException('\PHPUnit_Framework_ExpectationFailedException', 'valid');
-
         $this->assertConfigurationIsValid(
             array(
                 array()
@@ -105,12 +105,13 @@ class PartialConfigurationIntegrationTest extends AbstractConfigurationTestCase
 
     /**
      * @test
+     * @expectedException \PHPUnit_Framework_ExpectationFailedException
+     * @expectedExceptionMessage equal
      */
     public function it_fails_when_a_processed_configuration_does_not_match_the_expected_array_of_values()
     {
         $value = 'some value';
 
-        $this->setExpectedException('\PHPUnit_Framework_ExpectationFailedException', 'equal');
         $this->assertProcessedConfigurationEquals(
             array(
                 array(

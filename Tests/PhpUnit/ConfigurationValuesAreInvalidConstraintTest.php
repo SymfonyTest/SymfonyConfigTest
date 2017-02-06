@@ -10,24 +10,24 @@ class ConfigurationValuesAreInvalidConstraintTest extends \PHPUnit_Framework_Tes
 {
     /**
      * @test
+     * @expectedException \InvalidArgumentException
+     * @expectedExceptionMessage array
      */
     public function if_configuration_values_is_no_array_it_fails()
     {
         $constraint = new ConfigurationValuesAreInvalidConstraint(new AlwaysValidConfiguration());
-
-        $this->setExpectedException('\InvalidArgumentException', 'array');
 
         $constraint->evaluate('not an array');
     }
 
     /**
      * @test
+     * @expectedException \InvalidArgumentException
+     * @expectedExceptionMessage array
      */
     public function if_configuration_values_is_no_array_of_arrays_it_fails()
     {
         $constraint = new ConfigurationValuesAreInvalidConstraint(new AlwaysValidConfiguration());
-
-        $this->setExpectedException('\InvalidArgumentException', 'array');
 
         $constraint->evaluate(array('not an array'));
     }
@@ -88,13 +88,6 @@ class ConfigurationValuesAreInvalidConstraintTest extends \PHPUnit_Framework_Tes
             '/required[_]{1}value/',
             true // use regular expressions
         );
-
-        if (version_compare(\PHPUnit_Runner_Version::id(), '4.2.0', '<')) {
-            $this->setExpectedException(
-                '\InvalidArgumentException',
-                'does not support matching exception messages by regular expression'
-            );
-        }
 
         $this->assertTrue($constraint->evaluate(array(array()), '', true));
     }
