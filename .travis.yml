@@ -23,8 +23,7 @@ before_install:
 
 install:
   - if [ ! -z ${SYMFONY_VERSION+x} ]; then composer require --no-update "symfony/config:${SYMFONY_VERSION}"; fi
-  - if [ "$deps" = "low" ]; then composer update --prefer-lowest --prefer-dist; fi
-  - if [ "$deps" = "" ]; then composer install --prefer-dist; fi
+  - composer install --prefer-dist
 
 script: vendor/bin/phpunit
 
