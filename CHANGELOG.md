@@ -6,6 +6,7 @@
 - Only support Symfony 2.* and 3.* LTS versions
 - Require PHP ^7.0
 - Drop support for HHVM
+- Deprecated `Matthias\SymfonyConfigTest\PhpUnit\AbstractConfigurationTestCase`, use `Matthias\SymfonyConfigTest\PhpUnit\ConfigurationTestCaseTrait` instead.
 
 ## 2.0.0
 
