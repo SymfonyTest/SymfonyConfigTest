@@ -5,8 +5,9 @@ namespace Matthias\SymfonyConfigTest\Tests;
 use Matthias\SymfonyConfigTest\PhpUnit\ConfigurationValuesAreValidConstraint;
 use Matthias\SymfonyConfigTest\Tests\PhpUnit\Fixtures\AlwaysValidConfiguration;
 use Matthias\SymfonyConfigTest\Tests\PhpUnit\Fixtures\ConfigurationWithRequiredValue;
+use PHPUnit\Framework\TestCase;
 
-class ConfigurationValuesAreValidConstraintTest extends \PHPUnit_Framework_TestCase
+class ConfigurationValuesAreValidConstraintTest extends TestCase
 {
     /**
      * @test
@@ -15,7 +16,8 @@ class ConfigurationValuesAreValidConstraintTest extends \PHPUnit_Framework_TestC
     {
         $constraint = new ConfigurationValuesAreValidConstraint(new AlwaysValidConfiguration());
 
-        $this->setExpectedException('\InvalidArgumentException', 'array');
+        $this->expectException(\InvalidArgumentException::class);
+        $this->expectExceptionMessage('array');
 
         $constraint->evaluate('not an array');
     }
@@ -27,7 +29,8 @@ class ConfigurationValuesAreValidConstraintTest extends \PHPUnit_Framework_TestC
     {
         $constraint = new ConfigurationValuesAreValidConstraint(new AlwaysValidConfiguration());
 
-        $this->setExpectedException('\InvalidArgumentException', 'array');
+        $this->expectException(\InvalidArgumentException::class);
+        $this->expectExceptionMessage('array');
 
         $constraint->evaluate(array('not an array'));
     }

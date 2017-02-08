@@ -5,8 +5,9 @@ namespace Matthias\SymfonyConfigTest\Tests;
 use Matthias\SymfonyConfigTest\PhpUnit\ProcessedConfigurationEqualsConstraint;
 use Matthias\SymfonyConfigTest\Tests\PhpUnit\Fixtures\AlwaysValidConfiguration;
 use Matthias\SymfonyConfigTest\Tests\PhpUnit\Fixtures\ConfigurationWithRequiredValue;
+use PHPUnit\Framework\TestCase;
 
-class ProcessedConfigurationEqualsConstraintTest extends \PHPUnit_Framework_TestCase
+class ProcessedConfigurationEqualsConstraintTest extends TestCase
 {
     /**
      * @test

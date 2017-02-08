@@ -4,9 +4,10 @@ namespace Matthias\SymfonyConfigTest\Tests\Partial;
 
 use Matthias\SymfonyConfigTest\Partial\PartialProcessor;
 use Matthias\SymfonyConfigTest\Tests\Partial\Fixtures\ConfigurationStub;
+use PHPUnit\Framework\TestCase;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 
-class PartialProcessorTest extends \PHPUnit_Framework_TestCase
+class PartialProcessorTest extends TestCase
 {
     /**
      * @test

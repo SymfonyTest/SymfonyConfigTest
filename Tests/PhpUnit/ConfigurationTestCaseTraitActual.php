@@ -4,8 +4,9 @@ namespace Matthias\SymfonyConfigTest\Tests;
 
 use Matthias\SymfonyConfigTest\PhpUnit\ConfigurationTestCaseTrait;
 use Matthias\SymfonyConfigTest\Tests\PhpUnit\Fixtures\ConfigurationWithRequiredValue;
+use PHPUnit\Framework\TestCase;
 
-class ConfigurationTestCaseTraitTest extends \PHPUnit_Framework_TestCase
+class ConfigurationTestCaseTraitTest extends TestCase
 {
     use ConfigurationTestCaseTrait;
 

@@ -5,8 +5,9 @@ namespace Matthias\SymfonyConfigTest\Tests;
 use Matthias\SymfonyConfigTest\PhpUnit\ConfigurationValuesAreInvalidConstraint;
 use Matthias\SymfonyConfigTest\Tests\PhpUnit\Fixtures\AlwaysValidConfiguration;
 use Matthias\SymfonyConfigTest\Tests\PhpUnit\Fixtures\ConfigurationWithRequiredValue;
+use PHPUnit\Framework\TestCase;
 
-class ConfigurationValuesAreInvalidConstraintTest extends \PHPUnit_Framework_TestCase
+class ConfigurationValuesAreInvalidConstraintTest extends TestCase
 {
     /**
      * @test
@@ -15,7 +16,8 @@ class ConfigurationValuesAreInvalidConstraintTest extends \PHPUnit_Framework_Tes
     {
         $constraint = new ConfigurationValuesAreInvalidConstraint(new AlwaysValidConfiguration());
 
-        $this->setExpectedException('\InvalidArgumentException', 'array');
+        $this->expectException(\InvalidArgumentException::class);
+        $this->expectExceptionMessage('array');
 
         $constraint->evaluate('not an array');
     }
@@ -27,7 +29,8 @@ class ConfigurationValuesAreInvalidConstraintTest extends \PHPUnit_Framework_Tes
     {
         $constraint = new ConfigurationValuesAreInvalidConstraint(new AlwaysValidConfiguration());
 
-        $this->setExpectedException('\InvalidArgumentException', 'array');
+        $this->expectException(\InvalidArgumentException::class);
+        $this->expectExceptionMessage('array');
 
         $constraint->evaluate(array('not an array'));
     }
@@ -88,13 +91,6 @@ class ConfigurationValuesAreInvalidConstraintTest extends \PHPUnit_Framework_Tes
             '/required[_]{1}value/',
             true // use regular expressions
         );
-
-        if (version_compare(\PHPUnit_Runner_Version::id(), '4.2.0', '<')) {
-            $this->setExpectedException(
-                '\InvalidArgumentException',
-                'does not support matching exception messages by regular expression'
-            );
-        }
 
         $this->assertTrue($constraint->evaluate(array(array()), '', true));
     }

@@ -2,6 +2,8 @@
 
 namespace Matthias\SymfonyConfigTest\PhpUnit;
 
+use PHPUnit\Framework\Constraint\ExceptionMessage;
+use PHPUnit\Framework\Constraint\ExceptionMessageRegularExpression;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 use Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
 
@@ -62,16 +64,10 @@ class ConfigurationValuesAreInvalidConstraint extends AbstractConfigurationConst
 
     private function createPhpUnitConstraint()
     {
-        // Matching by regular expression was added in PHPUnit 4.2.0
-        if ($this->useRegExp && version_compare(\PHPUnit_Runner_Version::id(), '4.2.0', '<')) {
-            throw new \InvalidArgumentException('Currently installed PHPUnit version does not support matching exception messages by regular expression.');
+        if ($this->useRegExp) {
+            return new ExceptionMessageRegularExpression($this->expectedMessage);
         }
 
-        // Matching by regular expression was moved to a separate constraint in PHPUnit 4.3.0
-        if ($this->useRegExp && class_exists('PHPUnit_Framework_Constraint_ExceptionMessageRegExp')) {
-            return new \PHPUnit_Framework_Constraint_ExceptionMessageRegExp($this->expectedMessage);
-        }
-
-        return new \PHPUnit_Framework_Constraint_ExceptionMessage($this->expectedMessage);
+        return new ExceptionMessage($this->expectedMessage);
     }
 }

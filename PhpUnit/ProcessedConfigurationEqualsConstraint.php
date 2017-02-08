@@ -2,6 +2,7 @@
 
 namespace Matthias\SymfonyConfigTest\PhpUnit;
 
+use PHPUnit\Framework\Constraint\IsEqual;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 
 class ProcessedConfigurationEqualsConstraint extends AbstractConfigurationConstraint
@@ -23,13 +24,13 @@ class ProcessedConfigurationEqualsConstraint extends AbstractConfigurationConstr
     {
         $processedConfiguration = $this->processConfiguration($this->configurationValues);
 
-        $constraint = new \PHPUnit_Framework_Constraint_IsEqual($other);
+        $constraint = new IsEqual($other);
 
         return $constraint->evaluate($processedConfiguration, '', $returnResult);
     }
 
     public function toString()
     {
-        // won't be used, this constraint only wraps \PHPUnit_Framework_Constraint_IsEqual
+        // won't be used, this constraint only wraps IsEqual
     }
 }

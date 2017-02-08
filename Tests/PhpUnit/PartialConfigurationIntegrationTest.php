@@ -2,11 +2,15 @@
 
 namespace Matthias\SymfonyConfigTest\Tests;
 
-use Matthias\SymfonyConfigTest\PhpUnit\AbstractConfigurationTestCase;
+use Matthias\SymfonyConfigTest\PhpUnit\ConfigurationTestCaseTrait;
 use Matthias\SymfonyConfigTest\Tests\PhpUnit\Fixtures\ConfigurationWithMultipleArrayKeys;
+use PHPUnit\Framework\ExpectationFailedException;
+use PHPUnit\Framework\TestCase;
 
-class PartialConfigurationIntegrationTest extends AbstractConfigurationTestCase
+class PartialConfigurationIntegrationTest extends TestCase
 {
+    use ConfigurationTestCaseTrait;
+
     protected function getConfiguration()
     {
         return new ConfigurationWithMultipleArrayKeys();
@@ -31,7 +35,8 @@ class PartialConfigurationIntegrationTest extends AbstractConfigurationTestCase
      */
     public function it_fails_when_a_configuration_is_valid_when_it_should_have_been_invalid()
     {
-        $this->setExpectedException('\PHPUnit_Framework_ExpectationFailedException', 'invalid');
+        $this->expectException(ExpectationFailedException::class);
+        $this->expectExceptionMessage('invalid');
 
         $this->assertPartialConfigurationIsInvalid(
             array(
@@ -67,7 +72,8 @@ class PartialConfigurationIntegrationTest extends AbstractConfigurationTestCase
      */
     public function it_fails_when_a_configuration_is_invalid_when_it_should_have_been_valid()
     {
-        $this->setExpectedException('\PHPUnit_Framework_ExpectationFailedException', 'valid');
+        $this->expectException(ExpectationFailedException::class);
+        $this->expectExceptionMessage('valid');
 
         $this->assertConfigurationIsValid(
             array(
@@ -110,7 +116,8 @@ class PartialConfigurationIntegrationTest extends AbstractConfigurationTestCase
     {
         $value = 'some value';
 
-        $this->setExpectedException('\PHPUnit_Framework_ExpectationFailedException', 'equal');
+        $this->expectException(ExpectationFailedException::class);
+        $this->expectExceptionMessage('equal');
         $this->assertProcessedConfigurationEquals(
             array(
                 array(
@@ -151,7 +158,7 @@ class PartialConfigurationIntegrationTest extends AbstractConfigurationTestCase
                 $expectedProcessedConfigurationValues,
                 'array_node_1'
             );
-        } catch (\PHPUnit_Framework_ExpectationFailedException $exception) {
+        } catch (ExpectationFailedException $exception) {
             $this->assertSame(
                 $expectedProcessedConfigurationValues,
                 $exception->getComparisonFailure()->getExpected()

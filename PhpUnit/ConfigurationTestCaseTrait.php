@@ -2,6 +2,8 @@
 
 namespace Matthias\SymfonyConfigTest\PhpUnit;
 
+use PHPUnit\Framework\TestCase;
+
 /**
  * Add this trait to your Test Case to add the ability of testing your configuration
  * which should implement Symfony\Component\Config\Definition\ConfigurationInterface
@@ -30,7 +32,7 @@ trait ConfigurationTestCaseTrait
      */
     protected function assertConfigurationIsInvalid(array $configurationValues, $expectedMessage = null, $useRegExp = false)
     {
-        \PHPUnit_Framework_TestCase::assertThat(
+        TestCase::assertThat(
             $configurationValues,
             new ConfigurationValuesAreInvalidConstraint(
                 $this->getConfiguration(),
@@ -59,7 +61,7 @@ trait ConfigurationTestCaseTrait
         $expectedMessage = null,
         $useRegExp = false
     ) {
-        \PHPUnit_Framework_TestCase::assertThat(
+        TestCase::assertThat(
             $configurationValues,
             new ConfigurationValuesAreInvalidConstraint(
                 $this->getConfiguration(),
@@ -80,7 +82,7 @@ trait ConfigurationTestCaseTrait
      */
     protected function assertConfigurationIsValid(array $configurationValues, $breadcrumbPath = null)
     {
-        \PHPUnit_Framework_TestCase::assertThat(
+        TestCase::assertThat(
             $configurationValues,
             new ConfigurationValuesAreValidConstraint(
                 $this->getConfiguration(),
@@ -103,7 +105,7 @@ trait ConfigurationTestCaseTrait
         array $expectedProcessedConfiguration,
         $breadcrumbPath = null
     ) {
-        \PHPUnit_Framework_TestCase::assertThat(
+        TestCase::assertThat(
             $expectedProcessedConfiguration,
             new ProcessedConfigurationEqualsConstraint(
                 $this->getConfiguration(),

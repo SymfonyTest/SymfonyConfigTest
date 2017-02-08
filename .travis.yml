@@ -4,8 +4,8 @@ sudo: false
 
 matrix:
   include:
-    - php: 7.0
-      env: SYMFONY_VERSION=2.3.*
+    - php: 5.6
+      env: SYMFONY_VERSION=2.3.* PHPUNIT_VERSION=^5.7
     - php: 7.0
       env: SYMFONY_VERSION=2.7.*
     - php: 7.0
@@ -13,10 +13,7 @@ matrix:
     - php: 7.0
       env: SYMFONY_VERSION=3.0.*
     - php: 7.0
-      env: SYMFONY_VERSION=3.1.*
-    - php: 7.0
-      env: PHPUNIT_VERSION=^4.0
-    - php: 5.6
+      env: SYMFONY_VERSION=3.2.*
     - php: hhvm
 
 cache:

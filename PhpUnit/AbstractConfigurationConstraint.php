@@ -3,19 +3,20 @@
 namespace Matthias\SymfonyConfigTest\PhpUnit;
 
 use Matthias\SymfonyConfigTest\Partial\PartialProcessor;
-use SebastianBergmann\Exporter\Exporter;
+use PHPUnit\Framework\Constraint\Constraint;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 
-abstract class AbstractConfigurationConstraint extends \PHPUnit_Framework_Constraint
+abstract class AbstractConfigurationConstraint extends Constraint
 {
     protected $configuration;
     protected $breadcrumbPath;
 
     public function __construct(ConfigurationInterface $configuration, $breadcrumbPath = null)
     {
+        parent::__construct();
+
         $this->configuration = $configuration;
         $this->breadcrumbPath = $breadcrumbPath;
-        $this->exporter = new Exporter();
     }
 
     protected function processConfiguration(array $configurationValues)
