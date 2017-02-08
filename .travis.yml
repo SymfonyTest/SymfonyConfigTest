@@ -12,7 +12,6 @@ matrix:
       env: SYMFONY_VERSION=3.0.*
     - php: 7.0
       env: SYMFONY_VERSION=3.2.*
-    - php: hhvm
 
 cache:
   directories:
