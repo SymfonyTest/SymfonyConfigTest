@@ -101,7 +101,7 @@ class PartialNode
     {
         if (!isset(self::$nodeChildrenProperty)) {
             self::$nodeChildrenProperty = new \ReflectionProperty(
-                'Symfony\Component\Config\Definition\ArrayNode',
+                ArrayNode::class,
                 'children'
             );
             self::$nodeChildrenProperty->setAccessible(true);
@@ -117,7 +117,7 @@ class PartialNode
     {
         if (!isset(self::$nodePrototypeProperty)) {
             self::$nodePrototypeProperty = new \ReflectionProperty(
-                'Symfony\Component\Config\Definition\PrototypedArrayNode',
+                PrototypedArrayNode::class,
                 'prototype'
             );
             self::$nodePrototypeProperty->setAccessible(true);

@@ -23,7 +23,7 @@ trait ConfigurationTestCaseTrait
      *
      * Optionally provide (part of) the exception message that you expect to receive.
      *
-     * When running PHPUnit >=4.3.0, you need to set useRegExp to true if you'd like
+     * You need to set useRegExp to true if you'd like
      * to match the exception message using a regular expression.
      *
      * @param array $configurationValues
@@ -47,7 +47,7 @@ trait ConfigurationTestCaseTrait
      *
      * Optionally provide (part of) the exception message that you expect to receive.
      *
-     * When running PHPUnit >=4.3.0, you need to set useRegExp to true if you'd like
+     * You need to set useRegExp to true if you'd like
      * to match the exception message using a regular expression.
      *
      * @param array $configurationValues

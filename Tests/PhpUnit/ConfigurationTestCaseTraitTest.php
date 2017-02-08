@@ -116,7 +116,6 @@ class ConfigurationTestCaseTraitTest extends TestCase
     {
         $value = 'some value';
 
-        //$this->setExpectedException('\PHPUnit_Framework_ExpectationFailedException', 'equal');
         $configurationValues = array(
             array('required_value' => $value)
         );

@@ -11,7 +11,7 @@ class AlwaysValidConfiguration implements ConfigurationInterface
     {
         $treeBuilder = new TreeBuilder();
 
-        $rootNode = $treeBuilder->root('root');
+        $treeBuilder->root('root');
 
         return $treeBuilder;
     }

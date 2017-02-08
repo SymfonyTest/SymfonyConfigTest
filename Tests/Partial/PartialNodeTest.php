@@ -2,6 +2,8 @@
 
 namespace Matthias\SymfonyConfigTest\Tests\Partial;
 
+use Matthias\SymfonyConfigTest\Partial\Exception\ChildIsNotAnArrayNode;
+use Matthias\SymfonyConfigTest\Partial\Exception\UndefinedChildNode;
 use Matthias\SymfonyConfigTest\Partial\PartialNode;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Config\Definition\ArrayNode;
@@ -150,7 +152,7 @@ class PartialNodeTest extends TestCase
 
         $node = $treeBuilder->buildTree();
 
-        $this->expectException('Matthias\SymfonyConfigTest\Partial\Exception\UndefinedChildNode');
+        $this->expectException(UndefinedChildNode::class);
         $this->expectExceptionMessage('Undefined child node "non_existing_node" (the part of the path that was successful: "root.sub_node")');
 
         PartialNode::excludeEverythingNotInPath($node, array('sub_node', 'non_existing_node'));
@@ -171,7 +173,7 @@ class PartialNodeTest extends TestCase
 
         $node = $treeBuilder->buildTree();
 
-        $this->expectException('Matthias\SymfonyConfigTest\Partial\Exception\ChildIsNotAnArrayNode');
+        $this->expectException(ChildIsNotAnArrayNode::class);
         $this->expectExceptionMessage('Child node "scalar_node" is not an array node (current path: "root.sub_node")');
 
         PartialNode::excludeEverythingNotInPath($node, array('sub_node', 'scalar_node', 'extra_node'));
