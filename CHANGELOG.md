@@ -1,5 +1,12 @@
 # Changelog
 
+## 3.0.0
+
+- Only support PHPUnit 6
+- Only support Symfony 2.* and 3.* LTS versions
+- Require PHP ^7.0
+- Drop support for HHVM
+
 ## 2.0.0
 
 - Use the breadcrumb path to test one particular part of a prototype node.
