@@ -5,7 +5,7 @@ sudo: false
 matrix:
   include:
     - php: 5.6
-      env: SYMFONY_VERSION=2.3.* PHPUNIT_VERSION=^5.7
+      env: deps="low"
     - php: 7.0
       env: SYMFONY_VERSION=2.7.*
     - php: 7.0
@@ -26,8 +26,10 @@ before_install:
 
 install:
   - if [ ! -z ${SYMFONY_VERSION+x} ]; then composer require --no-update "symfony/config:${SYMFONY_VERSION}"; fi
-  - if [ ! -z ${PHPUNIT_VERSION+x} ]; then composer require --no-update "phpunit/phpunit:${PHPUNIT_VERSION}"; fi
-  - composer update --prefer-dist
+  - if [ "$deps" = "low" ]; then composer update --prefer-lowest --prefer-dist; fi
+  - if [ "$deps" = "" ]; then composer install --prefer-dist; fi
+
+script: vendor/bin/phpunit
 
 notifications:
   email: matthiasnoback@gmail.com
