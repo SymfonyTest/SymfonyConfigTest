@@ -2,7 +2,7 @@
 
 *By Matthias Noback*
 
-[![Build Status](https://secure.travis-ci.org/matthiasnoback/SymfonyConfigTest.png)](http://travis-ci.org/matthiasnoback/SymfonyConfigTest)
+[![Build Status](https://secure.travis-ci.org/SymfonyTest/SymfonyConfigTest.png)](http://travis-ci.org/SymfonyTest/SymfonyConfigTest)
 
 Writing configuration classes using the [Symfony Config
 Component](http://symfony.com/doc/current/components/config/definition.html) can be quite hard. To help you verify the
