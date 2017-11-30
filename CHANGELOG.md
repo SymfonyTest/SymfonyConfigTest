@@ -1,5 +1,15 @@
 # Changelog
 
+## 3.1.0 
+
+- Support for Symfony 4
+
+## 3.0.1
+
+- Only support Symfony 2.* and 3.* LTS versions
+- Require PHP ^7.0
+- Drop support for HHVM
+
 ## 3.0.0
 
 - Only support PHPUnit 6
