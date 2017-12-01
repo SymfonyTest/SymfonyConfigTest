@@ -249,3 +249,11 @@ public function processed_configuration_for_array_node_1()
     );
 }
 ```
+
+## Version Guidance
+
+| Version | Released     | Status     |
+|---------|--------------|------------|
+| 3.x     | Nov 30, 2017 | Latest     |
+| 2.x     | Jun 18, 2016 | EOL        |
+| 1.x     | Oct 12, 2014 | EOL        |
