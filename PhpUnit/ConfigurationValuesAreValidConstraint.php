@@ -34,7 +34,7 @@ class ConfigurationValuesAreValidConstraint extends AbstractConfigurationConstra
         }
     }
 
-    public function toString()
+    public function toString(): string
     {
         return 'is valid for the given configuration';
     }

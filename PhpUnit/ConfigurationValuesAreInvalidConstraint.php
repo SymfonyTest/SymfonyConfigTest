@@ -41,7 +41,7 @@ class ConfigurationValuesAreInvalidConstraint extends AbstractConfigurationConst
         $this->fail($other, $description);
     }
 
-    public function toString()
+    public function toString(): string
     {
         $toString = 'is invalid for the given configuration';
 
