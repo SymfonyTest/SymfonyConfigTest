@@ -22,9 +22,9 @@ class PartialConfigurationIntegrationTest extends TestCase
     public function it_can_assert_that_a_configuration_is_invalid()
     {
         $this->assertPartialConfigurationIsInvalid(
-            array(
-                array() // no configuration values
-            ),
+            [
+                [], // no configuration values
+            ],
             'array_node_1',
             'array_node_1'
         );
@@ -39,13 +39,13 @@ class PartialConfigurationIntegrationTest extends TestCase
         $this->expectExceptionMessage('invalid');
 
         $this->assertPartialConfigurationIsInvalid(
-            array(
-                array(
-                    'array_node_1' => array(
-                        'required_value_1' => 'some value'
-                    )
-                )
-            ),
+            [
+                [
+                    'array_node_1' => [
+                        'required_value_1' => 'some value',
+                    ],
+                ],
+            ],
             'array_node_1'
         );
     }
@@ -56,13 +56,13 @@ class PartialConfigurationIntegrationTest extends TestCase
     public function it_can_assert_that_a_configuration_is_valid()
     {
         $this->assertConfigurationIsValid(
-            array(
-                array(
-                    'array_node_1' => array(
-                        'required_value_1' => 'some value'
-                    )
-                )
-            ),
+            [
+                [
+                    'array_node_1' => [
+                        'required_value_1' => 'some value',
+                    ],
+                ],
+            ],
             'array_node_1'
         );
     }
@@ -76,9 +76,9 @@ class PartialConfigurationIntegrationTest extends TestCase
         $this->expectExceptionMessage('valid');
 
         $this->assertConfigurationIsValid(
-            array(
-                array()
-            ),
+            [
+                [],
+            ],
             'array_node_1'
         );
     }
@@ -91,20 +91,20 @@ class PartialConfigurationIntegrationTest extends TestCase
         $value = 'some value';
 
         $this->assertProcessedConfigurationEquals(
-            array(
-                array(),
-                array(
-                    'array_node_1' => array(
-                        'required_value_1' => $value
-                    )
-                )
-            ),
-            array(
-                'array_node_1' => array(
+            [
+                [],
+                [
+                    'array_node_1' => [
+                        'required_value_1' => $value,
+                    ],
+                ],
+            ],
+            [
+                'array_node_1' => [
 
-                    'required_value_1' => $value
-                )
-            ),
+                    'required_value_1' => $value,
+                ],
+            ],
             'array_node_1'
         );
     }
@@ -119,16 +119,16 @@ class PartialConfigurationIntegrationTest extends TestCase
         $this->expectException(ExpectationFailedException::class);
         $this->expectExceptionMessage('equal');
         $this->assertProcessedConfigurationEquals(
-            array(
-                array(
-                    'array_node_1' => array(
-                        'required_value_1' => $value
-                    )
-                )
-            ),
-            array(
-                'invalid_key' => 'invalid_value'
-            ),
+            [
+                [
+                    'array_node_1' => [
+                        'required_value_1' => $value,
+                    ],
+                ],
+            ],
+            [
+                'invalid_key' => 'invalid_value',
+            ],
             'array_node_1'
         );
     }
@@ -140,17 +140,17 @@ class PartialConfigurationIntegrationTest extends TestCase
     {
         $value = 'some value';
 
-        $configurationValues = array(
-            array(
-                'array_node_1' => array(
-                    'required_value_1' => $value
-                )
-            )
-        );
+        $configurationValues = [
+            [
+                'array_node_1' => [
+                    'required_value_1' => $value,
+                ],
+            ],
+        ];
 
-        $expectedProcessedConfigurationValues = array(
-            'invalid_key' => 'invalid_value'
-        );
+        $expectedProcessedConfigurationValues = [
+            'invalid_key' => 'invalid_value',
+        ];
 
         try {
             $this->assertProcessedConfigurationEquals(

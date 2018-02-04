@@ -46,7 +46,7 @@ class ConfigurationValuesAreInvalidConstraint extends AbstractConfigurationConst
         $toString = 'is invalid for the given configuration';
 
         if ($this->expectedMessage !== null) {
-            $toString .= ' (expected exception message: ' . $this->expectedMessage . ')';
+            $toString .= ' (expected exception message: '.$this->expectedMessage.')';
         }
 
         return $toString;

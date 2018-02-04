@@ -6,13 +6,13 @@ use PHPUnit\Framework\TestCase;
 
 /**
  * Add this trait to your Test Case to add the ability of testing your configuration
- * which should implement Symfony\Component\Config\Definition\ConfigurationInterface
+ * which should implement Symfony\Component\Config\Definition\ConfigurationInterface.
  */
 trait ConfigurationTestCaseTrait
 {
     /**
      * Return the instance of ConfigurationInterface that should be used by the
-     * Configuration-specific assertions in this test-case
+     * Configuration-specific assertions in this test-case.
      *
      * @return \Symfony\Component\Config\Definition\ConfigurationInterface
      */
@@ -26,9 +26,9 @@ trait ConfigurationTestCaseTrait
      * You need to set useRegExp to true if you'd like
      * to match the exception message using a regular expression.
      *
-     * @param array $configurationValues
+     * @param array       $configurationValues
      * @param string|null $expectedMessage
-     * @param bool $useRegExp
+     * @param bool        $useRegExp
      */
     protected function assertConfigurationIsInvalid(array $configurationValues, $expectedMessage = null, $useRegExp = false)
     {
@@ -50,10 +50,10 @@ trait ConfigurationTestCaseTrait
      * You need to set useRegExp to true if you'd like
      * to match the exception message using a regular expression.
      *
-     * @param array $configurationValues
-     * @param string $breadcrumbPath The path that should be validated, e.g. "doctrine.orm"
+     * @param array       $configurationValues
+     * @param string      $breadcrumbPath      The path that should be validated, e.g. "doctrine.orm"
      * @param string|null $expectedMessage
-     * @param bool $useRegExp
+     * @param bool        $useRegExp
      */
     protected function assertPartialConfigurationIsInvalid(
         array $configurationValues,
@@ -77,7 +77,7 @@ trait ConfigurationTestCaseTrait
      *
      * Optionally provide the part of the configuration that you want to test, e.g. "doctrine.orm"
      *
-     * @param array $configurationValues
+     * @param array       $configurationValues
      * @param string|null $breadcrumbPath
      */
     protected function assertConfigurationIsValid(array $configurationValues, $breadcrumbPath = null)
@@ -96,8 +96,8 @@ trait ConfigurationTestCaseTrait
      *
      * Optionally provide the part of the configuration that you want to test, e.g. "doctrine.orm"
      *
-     * @param array $configurationValues
-     * @param array $expectedProcessedConfiguration
+     * @param array       $configurationValues
+     * @param array       $expectedProcessedConfiguration
      * @param string|null $breadcrumbPath
      */
     protected function assertProcessedConfigurationEquals(

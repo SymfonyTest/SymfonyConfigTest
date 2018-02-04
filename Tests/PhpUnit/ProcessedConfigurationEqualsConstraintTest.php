@@ -16,10 +16,10 @@ class ProcessedConfigurationEqualsConstraintTest extends TestCase
     {
         $constraint = new ProcessedConfigurationEqualsConstraint(
             new AlwaysValidConfiguration(),
-            array()
+            []
         );
 
-        $this->assertFalse($constraint->evaluate(array('non-existing-key' => array()), '', true));
+        $this->assertFalse($constraint->evaluate(['non-existing-key' => []], '', true));
     }
 
     /**
@@ -31,10 +31,10 @@ class ProcessedConfigurationEqualsConstraintTest extends TestCase
 
         $constraint = new ProcessedConfigurationEqualsConstraint(
             new ConfigurationWithRequiredValue(),
-            array(array('required_value' => $value))
+            [['required_value' => $value]]
         );
 
-        $this->assertTrue($constraint->evaluate(array('required_value'=> $value), '', true));
+        $this->assertTrue($constraint->evaluate(['required_value'=> $value], '', true));
     }
 
     /**
@@ -44,7 +44,7 @@ class ProcessedConfigurationEqualsConstraintTest extends TestCase
     {
         $constraint = new ProcessedConfigurationEqualsConstraint(
             new AlwaysValidConfiguration(),
-            array()
+            []
         );
 
         $this->assertNull($constraint->toString());
