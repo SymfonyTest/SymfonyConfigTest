@@ -29,8 +29,9 @@ class ProcessedConfigurationEqualsConstraint extends AbstractConfigurationConstr
         return $constraint->evaluate($processedConfiguration, '', $returnResult);
     }
 
-    public function toString()
+    public function toString(): string
     {
         // won't be used, this constraint only wraps IsEqual
+        return '';
     }
 }

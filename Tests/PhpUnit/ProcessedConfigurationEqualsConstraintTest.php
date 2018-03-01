@@ -47,6 +47,6 @@ class ProcessedConfigurationEqualsConstraintTest extends TestCase
             array()
         );
 
-        $this->assertNull($constraint->toString());
+        $this->assertEquals('', $constraint->toString());
     }
 }
