@@ -33,7 +33,7 @@ abstract class AbstractConfigurationConstraint extends Constraint
         }
 
         foreach ($configurationValues as $values) {
-            if (!is_array($values)) {
+            if (!is_array($values) && null !== $values) {
                 throw new \InvalidArgumentException('Configuration values should be an array of arrays');
             }
         }
