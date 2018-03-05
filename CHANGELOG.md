@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.1.1
+
+- Allow for completely empty configuration
+
 ## 3.1.0 
 
 - Support for Symfony 4
