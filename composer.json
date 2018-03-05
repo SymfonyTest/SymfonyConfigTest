@@ -21,5 +21,10 @@
     },
     "autoload": {
         "psr-4" : { "Matthias\\SymfonyConfigTest\\" : "" }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "4.0.x-dev"
+        }
     }
 }
