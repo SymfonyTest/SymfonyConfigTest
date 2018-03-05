@@ -1,6 +1,6 @@
 # SymfonyConfigTest
 
-*By Matthias Noback*
+*By Matthias Noback and contributors*
 
 [![Build Status](https://secure.travis-ci.org/SymfonyTest/SymfonyConfigTest.png)](http://travis-ci.org/SymfonyTest/SymfonyConfigTest)
 
