@@ -32,7 +32,7 @@ class ConfigurationValuesAreValidConstraintTest extends TestCase
         $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessage('array');
 
-        $constraint->evaluate(array('not an array'));
+        $constraint->evaluate(['not an array']);
     }
 
     /**
@@ -42,7 +42,7 @@ class ConfigurationValuesAreValidConstraintTest extends TestCase
     {
         $constraint = new ConfigurationValuesAreValidConstraint(new AlwaysValidConfiguration());
 
-        $this->assertTrue($constraint->evaluate(array(array()), '', true));
+        $this->assertTrue($constraint->evaluate([[]], '', true));
     }
 
     /**
@@ -52,7 +52,7 @@ class ConfigurationValuesAreValidConstraintTest extends TestCase
     {
         $constraint = new ConfigurationValuesAreValidConstraint(new ConfigurationWithRequiredValue());
 
-        $this->assertFalse($constraint->evaluate(array(array()), '', true));
+        $this->assertFalse($constraint->evaluate([[]], '', true));
     }
 
     /**
