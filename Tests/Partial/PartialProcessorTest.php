@@ -33,25 +33,25 @@ class PartialProcessorTest extends TestCase
 
         $partialProcessor = new PartialProcessor();
 
-        $processedConfig = $partialProcessor->process($node, 'only_test_this_node', array(
-            array(
-                'only_test_this_node' => array(
-                    'scalar_node' => 'no'
-                )
-            ),
-            array(
-                'only_test_this_node' => array(
-                    'scalar_node' => 'yes'
-                )
-            )
-        ));
+        $processedConfig = $partialProcessor->process($node, 'only_test_this_node', [
+            [
+                'only_test_this_node' => [
+                    'scalar_node' => 'no',
+                ],
+            ],
+            [
+                'only_test_this_node' => [
+                    'scalar_node' => 'yes',
+                ],
+            ],
+        ]);
 
         $this->assertSame(
-            array(
-                'only_test_this_node' => array(
-                    'scalar_node' => 'yes'
-                )
-            ), $processedConfig
+            [
+                'only_test_this_node' => [
+                    'scalar_node' => 'yes',
+                ],
+            ], $processedConfig
         );
     }
 
@@ -65,21 +65,21 @@ class PartialProcessorTest extends TestCase
         $processedConfig = $partialProcessor->processConfiguration(
             new ConfigurationStub(),
             'only_test_this_node',
-            array(
-                array(
-                    'only_test_this_node' => array(
-                        'scalar_node' => 'yes'
-                    )
-                )
-            )
+            [
+                [
+                    'only_test_this_node' => [
+                        'scalar_node' => 'yes',
+                    ],
+                ],
+            ]
         );
 
         $this->assertSame(
-            array(
-                'only_test_this_node' => array(
-                    'scalar_node' => 'yes'
-                )
-            ), $processedConfig
+            [
+                'only_test_this_node' => [
+                    'scalar_node' => 'yes',
+                ],
+            ], $processedConfig
         );
     }
 }

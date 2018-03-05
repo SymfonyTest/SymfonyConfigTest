@@ -22,9 +22,9 @@ class ConfigurationTestCaseTraitTest extends TestCase
     public function it_can_assert_that_a_configuration_is_invalid()
     {
         $this->assertConfigurationIsInvalid(
-            array(
-                array() // no configuration values
-            ),
+            [
+                [], // no configuration values
+            ],
             'required_value'
         );
     }
@@ -38,9 +38,9 @@ class ConfigurationTestCaseTraitTest extends TestCase
         $this->expectExceptionMessage('invalid');
 
         $this->assertConfigurationIsInvalid(
-            array(
-                array('required_value' => 'some value')
-            )
+            [
+                ['required_value' => 'some value'],
+            ]
         );
     }
 
@@ -50,9 +50,9 @@ class ConfigurationTestCaseTraitTest extends TestCase
     public function it_can_assert_that_a_configuration_is_valid()
     {
         $this->assertConfigurationIsValid(
-            array(
-                array('required_value' => 'some value')
-            )
+            [
+                ['required_value' => 'some value'],
+            ]
         );
     }
 
@@ -65,9 +65,9 @@ class ConfigurationTestCaseTraitTest extends TestCase
         $this->expectExceptionMessage('The child node "required_value" at path "root" must be configured.');
 
         $this->assertConfigurationIsValid(
-            array(
-                array()
-            )
+            [
+                [],
+            ]
         );
     }
 
@@ -79,13 +79,13 @@ class ConfigurationTestCaseTraitTest extends TestCase
         $value = 'some value';
 
         $this->assertProcessedConfigurationEquals(
-            array(
-                array(),
-                array('required_value' => $value)
-            ),
-            array(
-                'required_value' => $value
-            )
+            [
+                [],
+                ['required_value' => $value],
+            ],
+            [
+                'required_value' => $value,
+            ]
         );
     }
 
@@ -100,12 +100,12 @@ class ConfigurationTestCaseTraitTest extends TestCase
         $this->expectExceptionMessage('equal');
 
         $this->assertProcessedConfigurationEquals(
-            array(
-                array('required_value' => $value)
-            ),
-            array(
-                'invalid_key' => 'invalid_value'
-            )
+            [
+                ['required_value' => $value],
+            ],
+            [
+                'invalid_key' => 'invalid_value',
+            ]
         );
     }
 
@@ -116,13 +116,13 @@ class ConfigurationTestCaseTraitTest extends TestCase
     {
         $value = 'some value';
 
-        $configurationValues = array(
-            array('required_value' => $value)
-        );
+        $configurationValues = [
+            ['required_value' => $value],
+        ];
 
-        $expectedProcessedConfigurationValues = array(
-            'invalid_key' => 'invalid_value'
-        );
+        $expectedProcessedConfigurationValues = [
+            'invalid_key' => 'invalid_value',
+        ];
 
         try {
             $this->assertProcessedConfigurationEquals(

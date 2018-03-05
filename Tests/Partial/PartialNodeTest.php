@@ -33,9 +33,9 @@ class PartialNodeTest extends TestCase
                         ->scalarNode('node_2_scalar_node');
 
         $node = $treeBuilder->buildTree();
-        /** @var ArrayNode $node */
+        /* @var ArrayNode $node */
 
-        PartialNode::excludeEverythingNotInPath($node, array('node_2'));
+        PartialNode::excludeEverythingNotInPath($node, ['node_2']);
 
         $this->nodeOnlyHasChild($node, 'node_2');
     }
@@ -70,9 +70,9 @@ class PartialNodeTest extends TestCase
                         ->scalarNode('scalar_node');
 
         $node = $treeBuilder->buildTree();
-        /** @var ArrayNode $node */
+        /* @var ArrayNode $node */
 
-        PartialNode::excludeEverythingNotInPath($node, array('node_1', 'node_1_b'));
+        PartialNode::excludeEverythingNotInPath($node, ['node_1', 'node_1_b']);
 
         $node1 = $this->nodeOnlyHasChild($node, 'node_1');
         $this->nodeOnlyHasChild($node1, 'node_1_b');
@@ -98,9 +98,9 @@ class PartialNodeTest extends TestCase
                 ->scalarNode('node_3');
 
         $node = $treeBuilder->buildTree();
-        /** @var ArrayNode $node */
+        /* @var ArrayNode $node */
 
-        PartialNode::excludeEverythingNotInPath($node, array('node_3'));
+        PartialNode::excludeEverythingNotInPath($node, ['node_3']);
 
         $this->nodeOnlyHasChild($node, 'node_3');
     }
@@ -123,8 +123,7 @@ class PartialNodeTest extends TestCase
                     ->end()
                     ->arrayNode('node_2')
                         ->children()
-                            ->scalarNode('node_2_scalar_node')
-        ;
+                            ->scalarNode('node_2_scalar_node');
 
         /** @var PrototypedArrayNode $node */
         $node = $treeBuilder->buildTree();
@@ -132,7 +131,7 @@ class PartialNodeTest extends TestCase
         /** @var ArrayNode $prototypeNode */
         $prototypeNode = $node->getPrototype();
 
-        PartialNode::excludeEverythingNotInPath($node, array('*', 'node_1'));
+        PartialNode::excludeEverythingNotInPath($node, ['*', 'node_1']);
 
         $this->nodeOnlyHasChild($prototypeNode, 'node_1');
     }
@@ -155,7 +154,7 @@ class PartialNodeTest extends TestCase
         $this->expectException(UndefinedChildNode::class);
         $this->expectExceptionMessage('Undefined child node "non_existing_node" (the part of the path that was successful: "root.sub_node")');
 
-        PartialNode::excludeEverythingNotInPath($node, array('sub_node', 'non_existing_node'));
+        PartialNode::excludeEverythingNotInPath($node, ['sub_node', 'non_existing_node']);
     }
 
     /**
@@ -176,7 +175,7 @@ class PartialNodeTest extends TestCase
         $this->expectException(ChildIsNotAnArrayNode::class);
         $this->expectExceptionMessage('Child node "scalar_node" is not an array node (current path: "root.sub_node")');
 
-        PartialNode::excludeEverythingNotInPath($node, array('sub_node', 'scalar_node', 'extra_node'));
+        PartialNode::excludeEverythingNotInPath($node, ['sub_node', 'scalar_node', 'extra_node']);
     }
 
     private function nodeOnlyHasChild(ArrayNode $node, $nodeName)

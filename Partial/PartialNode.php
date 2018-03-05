@@ -26,7 +26,7 @@ class PartialNode
      * would be removed entirely.
      *
      * @param ArrayNode $node
-     * @param string $breadcrumbPath
+     * @param string    $breadcrumbPath
      */
     public static function excludeEverythingNotInBreadcrumbPath(ArrayNode $node, $breadcrumbPath)
     {
@@ -42,7 +42,7 @@ class PartialNode
     /**
      * @param array $path
      */
-    public static function excludeEverythingNotInPath(ArrayNode $node, array $path = array())
+    public static function excludeEverythingNotInPath(ArrayNode $node, array $path = [])
     {
         if (empty($path)) {
             return;
@@ -72,7 +72,7 @@ class PartialNode
 
     /**
      * @param ArrayNode $node
-     * @param string $childNodeName
+     * @param string    $childNodeName
      *
      * @return NodeInterface
      */

@@ -32,7 +32,7 @@ class ConfigurationValuesAreInvalidConstraintTest extends TestCase
         $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessage('array');
 
-        $constraint->evaluate(array('not an array'));
+        $constraint->evaluate(['not an array']);
     }
 
     /**
@@ -42,7 +42,7 @@ class ConfigurationValuesAreInvalidConstraintTest extends TestCase
     {
         $constraint = new ConfigurationValuesAreInvalidConstraint(new AlwaysValidConfiguration());
 
-        $this->assertFalse($constraint->evaluate(array(array()), '', true));
+        $this->assertFalse($constraint->evaluate([[]], '', true));
     }
 
     /**
@@ -52,7 +52,7 @@ class ConfigurationValuesAreInvalidConstraintTest extends TestCase
     {
         $constraint = new ConfigurationValuesAreInvalidConstraint(new ConfigurationWithRequiredValue());
 
-        $this->assertTrue($constraint->evaluate(array(array()), '', true));
+        $this->assertTrue($constraint->evaluate([[]], '', true));
     }
 
     /**
@@ -65,7 +65,7 @@ class ConfigurationValuesAreInvalidConstraintTest extends TestCase
             'expected message which will not be part of the actual message'
         );
 
-        $this->assertFalse($constraint->evaluate(array(array()), '', true));
+        $this->assertFalse($constraint->evaluate([[]], '', true));
     }
 
     /**
@@ -78,7 +78,7 @@ class ConfigurationValuesAreInvalidConstraintTest extends TestCase
             'required_value'
         );
 
-        $this->assertTrue($constraint->evaluate(array(array()), '', true));
+        $this->assertTrue($constraint->evaluate([[]], '', true));
     }
 
     /**
@@ -92,7 +92,7 @@ class ConfigurationValuesAreInvalidConstraintTest extends TestCase
             true // use regular expressions
         );
 
-        $this->assertTrue($constraint->evaluate(array(array()), '', true));
+        $this->assertTrue($constraint->evaluate([[]], '', true));
     }
 
     /**
