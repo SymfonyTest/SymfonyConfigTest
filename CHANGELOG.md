@@ -5,6 +5,7 @@
 - dropped support for PHPUnit < 7.0
 - [BC Break] add return type hints to all `toString()` methods of the constraint classes for compatability with PHPUnit 7
 - dropped support for PHP < 7.1
+- Allow for completely empty configuration
 
 ## 3.1.0 
 
