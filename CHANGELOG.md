@@ -1,5 +1,11 @@
 # Changelog
 
+## 4.0.0
+
+- dropped support for PHPUnit < 7.0
+- [BC Break] add return type hints to all `toString()` methods of the constraint classes for compatability with PHPUnit 7
+- dropped support for PHP < 7.1
+
 ## 3.1.0 
 
 - Support for Symfony 4
