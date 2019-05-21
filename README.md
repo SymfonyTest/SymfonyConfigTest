@@ -1,4 +1,4 @@
-# SymfonyConfigTest
+# Symfony Config Test
 
 *By Matthias Noback and contributors*
 
@@ -12,7 +12,7 @@ validity of the resulting config node tree, this library provides a PHPUnit test
 
 Using Composer:
 
-    php composer.phar require --dev matthiasnoback/symfony-config-test
+    $ composer require --dev matthiasnoback/symfony-config-test
 
 ## Usage
 
@@ -22,11 +22,15 @@ Then implement ``getConfiguration()``:
 ```php
 <?php
 
-class ConfigurationTest extends \PHPUnit_Framework_TestCase
+use Matthias\SymfonyConfigTest\PhpUnit\ConfigurationTestCaseTrait;
+use PHPUnit\Framework\TestCase;
+use App\Configuration;
+
+class ConfigurationTest extends TestCase
 {
     use ConfigurationTestCaseTrait;
 
-    protected function getConfiguration()
+    protected function getConfiguration(): Configuration
     {
         return new Configuration();
     }
@@ -45,7 +49,7 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
 
 class ConfigurationWithRequiredValue implements ConfigurationInterface
 {
-    public function getConfigTreeBuilder()
+    public function getConfigTreeBuilder(): TreeBuilder
     {
         $treeBuilder = new TreeBuilder();
 
@@ -70,16 +74,22 @@ When you provide an empty array as the value for this configuration, you would e
 ```php
 <?php
 
-class ConfigurationTest extends \PHPUnit_Framework_TestCase
+use Matthias\SymfonyConfigTest\PhpUnit\ConfigurationTestCaseTrait;
+use PHPUnit\Framework\TestCase;
+
+class ConfigurationTest extends TestCase
 {
     use ConfigurationTestCaseTrait;
 
-    public function testValuesAreInvalidIfRequiredValueIsNotProvided()
+    /**
+     * @test
+     */
+    public function values_are_invalid_if_required_value_is_not_provided(): void
     {
         $this->assertConfigurationIsInvalid(
-            array(
-                array() // no values at all
-            ),
+            [
+                [] // no values at all
+            ],
             'required_value' // (part of) the expected exception message - optional
         );
     }
@@ -93,18 +103,24 @@ You may also want to verify that after processing an array of configuration valu
 ```php
 <?php
 
-class ConfigurationTest extends \PHPUnit_Framework_TestCase
+use Matthias\SymfonyConfigTest\PhpUnit\ConfigurationTestCaseTrait;
+use PHPUnit\Framework\TestCase;
+
+class ConfigurationTest extends TestCase
 {
     use ConfigurationTestCaseTrait;
 
-    public function testProcessedValueContainsRequiredValue()
+    /**
+     * @test
+     */
+    public function processed_value_contains_required_value(): void
     {
-        $this->assertProcessedConfigurationEquals(array(
-            array('required_value' => 'first value'),
-            array('required_value' => 'last value')
-        ), array(
+        $this->assertProcessedConfigurationEquals([
+            ['required_value' => 'first value'],
+            ['required_value' => 'last value']
+        ], [
             'required_value'=> 'last value'
-        ));
+        ]);
     }
 }
 ```
@@ -127,7 +143,7 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
 
 class ConfigurationWithTwoBranches implements ConfigurationInterface
 {
-    public function getConfigTreeBuilder()
+    public function getConfigTreeBuilder(): TreeBuilder
     {
         $treeBuilder = new TreeBuilder();
 
@@ -164,18 +180,18 @@ provide `array_node_1` as the argument for the `$breadcrumbPath` parameter of th
 /**
  * @test
  */
-public function processed_configuration_for_array_node_1()
+public function processed_configuration_for_array_node_1(): void
 {
     $this->assertProcessedConfigurationEquals(
         array(
-            array('array_node_1' => array('required_value_1' => 'original value')),
-            array('array_node_1' => array('required_value_1' => 'final value'))
+            ['array_node_1' => ['required_value_1' => 'original value']],
+            ['array_node_1' => ['required_value_1' => 'final value']]
         ),
-        array(
-            'array_node_1' => array(
+        [
+            'array_node_1' => [
                 'required_value_1' => 'final value'
-            )
-        ),
+            ]
+        ],
         // the path of the nodes you want to focus on in this test:
         'array_node_1'
     );
@@ -201,7 +217,7 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
 
 class PrototypedConfiguration implements ConfigurationInterface
 {
-    public function getConfigTreeBuilder()
+    public function getConfigTreeBuilder(): TreeBuilder
     {
         $treeBuilder = new TreeBuilder();
 
@@ -231,19 +247,19 @@ requirements on `required_value` node, you can define its path as `array_node.*.
 /**
  * @test
  */
-public function processed_configuration_for_array_node_1()
+public function processed_configuration_for_array_node_1(): void
 {
     $this->assertProcessedConfigurationEquals(
-        array(
-            array('array_node' => array('prototype_name' => null)),
-        ),
-        array(
-            'array_node' => array(
-                'prototype_name' => array(
+        [
+            ['array_node' => ['prototype_name' => null]],
+        ],
+        [
+            'array_node' => [
+                'prototype_name' => [
                     'default_value' => 'foobar'
-                )
-            )
-        ),
+                ]
+            ]
+        ],
         // the path of the nodes you want to focus on in this test:
         'array_node.*.default_value'
     );
