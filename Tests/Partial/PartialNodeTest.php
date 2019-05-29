@@ -18,8 +18,12 @@ class PartialNodeTest extends TestCase
      */
     public function it_strips_children_that_are_not_in_the_given_path_with_one_name()
     {
-        $treeBuilder = new TreeBuilder();
-        $root = $treeBuilder->root('root');
+        $treeBuilder = new TreeBuilder('root');
+        if (method_exists($treeBuilder , 'getRootNode')) {
+            $root = $treeBuilder->getRootNode();
+        } else {
+            $root = $treeBuilder->root('root');
+        }
         $root
             ->children()
                 ->arrayNode('node_1')
@@ -45,8 +49,12 @@ class PartialNodeTest extends TestCase
      */
     public function it_strips_children_that_are_not_in_the_given_path_with_several_names()
     {
-        $treeBuilder = new TreeBuilder();
-        $root = $treeBuilder->root('root');
+        $treeBuilder = new TreeBuilder('root');
+        if (method_exists($treeBuilder , 'getRootNode')) {
+            $root = $treeBuilder->getRootNode();
+        } else {
+            $root = $treeBuilder->root('root');
+        }
         $root
             ->children()
                 ->arrayNode('node_1')
@@ -83,8 +91,12 @@ class PartialNodeTest extends TestCase
      */
     public function it_strips_children_when_leaf_node_is_not_an_array()
     {
-        $treeBuilder = new TreeBuilder();
-        $root = $treeBuilder->root('root');
+        $treeBuilder = new TreeBuilder('root');
+        if (method_exists($treeBuilder , 'getRootNode')) {
+            $root = $treeBuilder->getRootNode();
+        } else {
+            $root = $treeBuilder->root('root');
+        }
         $root
             ->children()
                 ->arrayNode('node_1')
@@ -110,9 +122,14 @@ class PartialNodeTest extends TestCase
      */
     public function it_does_not_crash_on_prototypes()
     {
-        $treeBuilder = new TreeBuilder();
+        $treeBuilder = new TreeBuilder('root');
         /** @var ArrayNodeDefinition $root */
-        $root = $treeBuilder->root('root');
+        if (method_exists($treeBuilder , 'getRootNode')) {
+            $root = $treeBuilder->getRootNode();
+        } else {
+            $root = $treeBuilder->root('root');
+        }
+
         $root
             ->prototype('array')
                 ->children()
@@ -141,8 +158,12 @@ class PartialNodeTest extends TestCase
      */
     public function it_fails_when_a_requested_child_node_does_not_exist()
     {
-        $treeBuilder = new TreeBuilder();
-        $root = $treeBuilder->root('root');
+        $treeBuilder = new TreeBuilder('root');
+        if (method_exists($treeBuilder , 'getRootNode')) {
+            $root = $treeBuilder->getRootNode();
+        } else {
+            $root = $treeBuilder->root('root');
+        }
         $root
             ->children()
                 ->arrayNode('sub_node')
@@ -162,8 +183,12 @@ class PartialNodeTest extends TestCase
      */
     public function it_fails_when_a_requested_child_node_is_no_array_node_itself_and_path_not_empty()
     {
-        $treeBuilder = new TreeBuilder();
-        $root = $treeBuilder->root('root');
+        $treeBuilder = new TreeBuilder('root');
+        if (method_exists($treeBuilder , 'getRootNode')) {
+            $root = $treeBuilder->getRootNode();
+        } else {
+            $root = $treeBuilder->root('root');
+        }
         $root
             ->children()
                 ->arrayNode('sub_node')

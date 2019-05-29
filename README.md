@@ -47,9 +47,9 @@ class ConfigurationWithRequiredValue implements ConfigurationInterface
 {
     public function getConfigTreeBuilder()
     {
-        $treeBuilder = new TreeBuilder();
+        $treeBuilder = new TreeBuilder('root');
 
-        $rootNode = $treeBuilder->root('root');
+        $rootNode = $treeBuilder->getRootNode();
         $rootNode
             ->isRequired()
             ->children()
@@ -129,9 +129,9 @@ class ConfigurationWithTwoBranches implements ConfigurationInterface
 {
     public function getConfigTreeBuilder()
     {
-        $treeBuilder = new TreeBuilder();
+        $treeBuilder = new TreeBuilder('root');
 
-        $rootNode = $treeBuilder->root('root');
+        $rootNode = $treeBuilder->getRootNode();
         $rootNode
             ->children()
                 ->arrayNode('array_node_1')
@@ -203,9 +203,9 @@ class PrototypedConfiguration implements ConfigurationInterface
 {
     public function getConfigTreeBuilder()
     {
-        $treeBuilder = new TreeBuilder();
+        $treeBuilder = new TreeBuilder('root');
 
-        $rootNode = $treeBuilder->root('root');
+        $rootNode = $treeBuilder->getRootNode();
         $rootNode
             ->children()
                 ->arrayNode('array_node')

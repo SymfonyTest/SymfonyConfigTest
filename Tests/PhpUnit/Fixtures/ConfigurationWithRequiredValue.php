@@ -9,9 +9,12 @@ class ConfigurationWithRequiredValue implements ConfigurationInterface
 {
     public function getConfigTreeBuilder()
     {
-        $treeBuilder = new TreeBuilder();
-
-        $rootNode = $treeBuilder->root('root');
+        $treeBuilder = new TreeBuilder('root');
+        if (method_exists($treeBuilder , 'getRootNode')) {
+            $rootNode = $treeBuilder->getRootNode();
+        } else {
+            $rootNode = $treeBuilder->root('root');
+        }
         $rootNode
             ->isRequired()
             ->children()

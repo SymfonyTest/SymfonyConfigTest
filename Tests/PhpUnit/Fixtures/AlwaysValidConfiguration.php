@@ -9,10 +9,8 @@ class AlwaysValidConfiguration implements ConfigurationInterface
 {
     public function getConfigTreeBuilder()
     {
-        $treeBuilder = new TreeBuilder();
-
-        $treeBuilder->root('root');
-
+        $treeBuilder = new TreeBuilder('root');
+        
         return $treeBuilder;
     }
 }
