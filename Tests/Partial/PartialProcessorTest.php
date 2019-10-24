@@ -14,8 +14,12 @@ class PartialProcessorTest extends TestCase
      */
     public function it_processes_only_the_values_in_the_breadcrumb_path_for_a_given_node()
     {
-        $treeBuilder = new TreeBuilder();
-        $root = $treeBuilder->root('root');
+        $treeBuilder = new TreeBuilder('root');
+        if (method_exists($treeBuilder, 'getRootNode')) {
+            $root = $treeBuilder->getRootNode();
+        } else {
+            $root = $treeBuilder->root('root');
+        }
         $root
             ->children()
                 ->arrayNode('only_test_this_node')
