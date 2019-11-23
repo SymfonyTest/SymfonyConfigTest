@@ -1,5 +1,13 @@
 # Changelog
 
+## 4.1.0
+
+- Support for Symfony5. 
+
+## 4.0.1
+
+- Support for PHPUnit8.
+
 ## 4.0.0
 
 - Dropped support for PHPUnit < 7.0
