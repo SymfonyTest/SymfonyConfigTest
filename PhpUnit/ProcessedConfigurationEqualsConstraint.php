@@ -20,7 +20,7 @@ class ProcessedConfigurationEqualsConstraint extends AbstractConfigurationConstr
         parent::__construct($configuration, $breadcrumbPath);
     }
 
-    public function evaluate($other, $description = '', $returnResult = false)
+    public function evaluate($other, $description = '', $returnResult = false): ?bool
     {
         $processedConfiguration = $this->processConfiguration($this->configurationValues);
 
