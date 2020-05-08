@@ -1,6 +1,6 @@
 # Changelog
 
-## 4.1.1
+## 4.2.0
 
 - Support for PHPUnit9.
 
