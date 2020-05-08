@@ -1,5 +1,9 @@
 # Changelog
 
+## 4.2.0
+
+- Support for PHPUnit9.
+
 ## 4.1.0
 
 - Support for Symfony5. 

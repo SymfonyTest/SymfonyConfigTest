@@ -24,7 +24,7 @@ class ConfigurationValuesAreInvalidConstraint extends AbstractConfigurationConst
         $this->useRegExp = $useRegExp;
     }
 
-    public function evaluate($other, $description = '', $returnResult = false)
+    public function evaluate($other, $description = '', $returnResult = false): ?bool
     {
         $this->validateConfigurationValuesArray($other);
 
@@ -39,6 +39,8 @@ class ConfigurationValuesAreInvalidConstraint extends AbstractConfigurationConst
         }
 
         $this->fail($other, $description);
+
+        return null;
     }
 
     public function toString(): string

@@ -12,7 +12,7 @@ class ConfigurationValuesAreValidConstraint extends AbstractConfigurationConstra
         parent::__construct($configuration, $breadcrumbPath);
     }
 
-    public function evaluate($other, $description = '', $returnResult = false)
+    public function evaluate($other, $description = '', $returnResult = false): ?bool
     {
         $this->validateConfigurationValuesArray($other);
 
@@ -32,6 +32,8 @@ class ConfigurationValuesAreValidConstraint extends AbstractConfigurationConstra
         if (!$success) {
             $this->fail($other, $description);
         }
+
+        return null;
     }
 
     public function toString(): string
