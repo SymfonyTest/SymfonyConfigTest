@@ -1,6 +1,6 @@
 <?php
 
-namespace Matthias\SymfonyConfigTest\Tests;
+namespace Matthias\SymfonyConfigTest\Tests\PhpUnit;
 
 use Matthias\SymfonyConfigTest\PhpUnit\ConfigurationValuesAreInvalidConstraint;
 use Matthias\SymfonyConfigTest\Tests\PhpUnit\Fixtures\AlwaysValidConfiguration;

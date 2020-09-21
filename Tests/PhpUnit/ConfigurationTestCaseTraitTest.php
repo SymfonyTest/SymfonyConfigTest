@@ -1,6 +1,6 @@
 <?php
 
-namespace Matthias\SymfonyConfigTest\Tests;
+namespace Matthias\SymfonyConfigTest\Tests\PhpUnit;
 
 use Matthias\SymfonyConfigTest\PhpUnit\ConfigurationTestCaseTrait;
 use Matthias\SymfonyConfigTest\Tests\PhpUnit\Fixtures\ConfigurationWithRequiredValue;
