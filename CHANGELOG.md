@@ -1,5 +1,10 @@
 # Changelog
 
+## 4.2.1
+
+- Support for PHP 8.
+- Updated namespace for tests.
+
 ## 4.2.0
 
 - Support for PHPUnit9.
