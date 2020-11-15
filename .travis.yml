@@ -32,6 +32,8 @@ matrix:
         - php: 7.4
           env: STABILITY="dev"
 
+        - php: 8.0snapshot
+
     allow_failures:
           # Dev-master is allowed to fail.
         - env: STABILITY="dev"
