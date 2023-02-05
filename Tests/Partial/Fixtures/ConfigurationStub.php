@@ -10,11 +10,7 @@ class ConfigurationStub implements ConfigurationInterface
     public function getConfigTreeBuilder()
     {
         $treeBuilder = new TreeBuilder('root');
-        if (method_exists($treeBuilder, 'getRootNode')) {
-            $root = $treeBuilder->getRootNode();
-        } else {
-            $root = $treeBuilder->root('root');
-        }
+        $root = $treeBuilder->getRootNode();
         $root
             ->children()
                 ->arrayNode('only_test_this_node')

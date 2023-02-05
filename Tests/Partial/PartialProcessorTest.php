@@ -15,11 +15,7 @@ class PartialProcessorTest extends TestCase
     public function it_processes_only_the_values_in_the_breadcrumb_path_for_a_given_node()
     {
         $treeBuilder = new TreeBuilder('root');
-        if (method_exists($treeBuilder, 'getRootNode')) {
-            $root = $treeBuilder->getRootNode();
-        } else {
-            $root = $treeBuilder->root('root');
-        }
+        $root = $treeBuilder->getRootNode();
         $root
             ->children()
                 ->arrayNode('only_test_this_node')
@@ -55,7 +51,8 @@ class PartialProcessorTest extends TestCase
                 'only_test_this_node' => [
                     'scalar_node' => 'yes',
                 ],
-            ], $processedConfig
+            ],
+            $processedConfig
         );
     }
 
@@ -83,7 +80,8 @@ class PartialProcessorTest extends TestCase
                 'only_test_this_node' => [
                     'scalar_node' => 'yes',
                 ],
-            ], $processedConfig
+            ],
+            $processedConfig
         );
     }
 }

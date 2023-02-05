@@ -10,11 +10,7 @@ class ConfigurationWithMultipleArrayKeys implements ConfigurationInterface
     public function getConfigTreeBuilder()
     {
         $treeBuilder = new TreeBuilder('root');
-        if (method_exists($treeBuilder, 'getRootNode')) {
-            $root = $treeBuilder->getRootNode();
-        } else {
-            $root = $treeBuilder->root('root');
-        }
+        $root = $treeBuilder->getRootNode();
         $root
             ->children()
                 ->arrayNode('array_node_1')
