@@ -23,7 +23,11 @@
         "phpunit/phpunit": "<7.0"
     },
     "autoload": {
-        "psr-4" : { "Matthias\\SymfonyConfigTest\\" : "" }
+        "psr-4" : { "Matthias\\SymfonyConfigTest\\" : "" },
+        "exclude-from-classmap": ["/Tests/"]
+    },
+    "autoload-dev": {
+        "psr-4" : { "Matthias\\SymfonyConfigTest\\Tests\\" : "Tests/" }
     },
     "extra": {
         "branch-alias": {
