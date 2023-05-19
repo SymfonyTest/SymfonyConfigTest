@@ -99,15 +99,10 @@ class PartialNode
      */
     private static function nodeChildrenProperty()
     {
-        if (!isset(self::$nodeChildrenProperty)) {
-            self::$nodeChildrenProperty = new \ReflectionProperty(
-                ArrayNode::class,
-                'children'
-            );
-            self::$nodeChildrenProperty->setAccessible(true);
-        }
-
-        return self::$nodeChildrenProperty;
+        return self::$nodeChildrenProperty ??= new \ReflectionProperty(
+            ArrayNode::class,
+            'children'
+        );
     }
 
     /**
@@ -115,14 +110,9 @@ class PartialNode
      */
     private static function nodePrototypeProperty()
     {
-        if (!isset(self::$nodePrototypeProperty)) {
-            self::$nodePrototypeProperty = new \ReflectionProperty(
-                PrototypedArrayNode::class,
-                'prototype'
-            );
-            self::$nodePrototypeProperty->setAccessible(true);
-        }
-
-        return self::$nodePrototypeProperty;
+        return self::$nodePrototypeProperty ??= new \ReflectionProperty(
+            PrototypedArrayNode::class,
+            'prototype'
+        );
     }
 }

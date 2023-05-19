@@ -63,11 +63,7 @@ class ConfigurationTestCaseTraitTest extends TestCase
     {
         $this->expectException(ExpectationFailedException::class);
 
-        if (method_exists($this, 'expectExceptionMessageMatches')) {
-            $this->expectExceptionMessageMatches('/^The child (config|node) "required_value" (at path|under) "root" must be configured/');
-        } else {
-            $this->expectExceptionMessageRegExp('/^The child (config|node) "required_value" (at path|under) "root" must be configured/');
-        }
+        $this->expectExceptionMessageMatches('/^The child (config|node) "required_value" (at path|under) "root" must be configured/');
 
         $this->assertConfigurationIsValid(
             [

@@ -13,10 +13,6 @@ abstract class AbstractConfigurationConstraint extends Constraint
 
     public function __construct(ConfigurationInterface $configuration, $breadcrumbPath = null)
     {
-        if (is_callable([Constraint::class, '__construct'])) {
-            parent::__construct();
-        }
-
         $this->configuration = $configuration;
         $this->breadcrumbPath = $breadcrumbPath;
     }
