@@ -2,7 +2,7 @@
     "name": "matthiasnoback/symfony-config-test",
     "type": "library",
     "description": "Library for testing user classes related to the Symfony Config Component",
-    "keywords": ["symfony", "config", "phpunit"],
+    "keywords": ["symfony", "config", "phpunit", "testing"],
     "homepage": "https://github.com/matthiasnoback/SymfonyConfigTest",
     "license": "MIT",
     "authors": [
