@@ -2,10 +2,10 @@
 
 *By Matthias Noback and contributors*
 
-[![Build Status](https://secure.travis-ci.org/SymfonyTest/SymfonyConfigTest.png)](http://travis-ci.org/SymfonyTest/SymfonyConfigTest)
+[![Build Status](https://github.com/SymfonyTest/SymfonyConfigTest/actions/workflows/ci.yaml/badge.svg)](https://github.com/SymfonyTest/SymfonyConfigTest/actions/workflows/ci.yaml)
 
 Writing configuration classes using the [Symfony Config
-Component](http://symfony.com/doc/current/components/config/definition.html) can be quite hard. To help you verify the
+Component](https://symfony.com/doc/current/components/config/definition.html) can be quite hard. To help you verify the
 validity of the resulting config node tree, this library provides a PHPUnit test case and some custom assertions.
 
 ## Installation
@@ -127,7 +127,7 @@ class ConfigurationTest extends TestCase
 
 Please note: the first argument of each of the ``assert*`` methods is an *array of arrays*. The extra nesting level
 allows you to test the merge process. See also the section [Merging
-options](http://symfony.com/doc/current/components/config/definition.html#merging-options) of the Config Component
+options](https://symfony.com/doc/current/components/config/definition.html#merging-options) of the Config Component
 documentation.
 
 ### Test a subset of the configuration tree
