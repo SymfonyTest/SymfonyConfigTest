@@ -13,20 +13,21 @@ jobs:
                 php:
                     - '8.1'
                     - '8.2'
+                    - '8.3'
                 dependency:
                     - ''
                 symfony:
                     - '5.4.*'
                     - '6.3.*'
-                    - '6.4.*@beta'
-                    - '7.0.*@beta'
+                    - '6.4.*'
+                    - '7.0.*'
                 include:
                     - php: '8.1'
                       symfony: '5.4.*'
                       dependency: 'lowest'
                 exclude:
                     - php: '8.1'
-                      symfony: '7.0.*@beta'
+                      symfony: '7.0.*'
             fail-fast: false
         steps:
             - name: Checkout
