@@ -270,7 +270,8 @@ public function processed_configuration_for_array_node_1(): void
 
 | Version | Released     | PHPUnit             | Status     |
 |---------|--------------| --------------------|------------|
-| 4.x     | Mar 5, 2018  | 7.x and 8.x and 9.x | Latest     |
-| 3.x     | Nov 30, 2017 | 6.x                 | Bugfixes   |
+| 5.x     | Jun 2, 2023  | 9.6 and 10.x        | Latest     |
+| 4.x     | Mar 5, 2018  | 7.x and 8.x and 9.x | Bugfixes   |
+| 3.x     | Nov 30, 2017 | 6.x                 | EOL        |
 | 2.x     | Jun 18, 2016 | 4.x and 5.x         | EOL        |
 | 1.x     | Oct 12, 2014 | 3.x                 | EOL        |
