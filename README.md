@@ -183,10 +183,10 @@ provide `array_node_1` as the argument for the `$breadcrumbPath` parameter of th
 public function processed_configuration_for_array_node_1(): void
 {
     $this->assertProcessedConfigurationEquals(
-        array(
+        [
             ['array_node_1' => ['required_value_1' => 'original value']],
             ['array_node_1' => ['required_value_1' => 'final value']]
-        ),
+        ],
         [
             'array_node_1' => [
                 'required_value_1' => 'final value'
