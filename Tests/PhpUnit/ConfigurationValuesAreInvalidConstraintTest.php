@@ -5,13 +5,12 @@ namespace Matthias\SymfonyConfigTest\Tests\PhpUnit;
 use Matthias\SymfonyConfigTest\PhpUnit\ConfigurationValuesAreInvalidConstraint;
 use Matthias\SymfonyConfigTest\Tests\PhpUnit\Fixtures\AlwaysValidConfiguration;
 use Matthias\SymfonyConfigTest\Tests\PhpUnit\Fixtures\ConfigurationWithRequiredValue;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 
 class ConfigurationValuesAreInvalidConstraintTest extends TestCase
 {
-    /**
-     * @test
-     */
+    #[Test]
     public function if_configuration_values_is_no_array_it_fails()
     {
         $constraint = new ConfigurationValuesAreInvalidConstraint(new AlwaysValidConfiguration());
@@ -22,9 +21,7 @@ class ConfigurationValuesAreInvalidConstraintTest extends TestCase
         $constraint->evaluate('not an array');
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function if_configuration_values_is_no_array_of_arrays_it_fails()
     {
         $constraint = new ConfigurationValuesAreInvalidConstraint(new AlwaysValidConfiguration());
@@ -35,9 +32,7 @@ class ConfigurationValuesAreInvalidConstraintTest extends TestCase
         $constraint->evaluate(['not an array']);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function if_configuration_values_are_valid_it_does_not_match()
     {
         $constraint = new ConfigurationValuesAreInvalidConstraint(new AlwaysValidConfiguration());
@@ -45,9 +40,7 @@ class ConfigurationValuesAreInvalidConstraintTest extends TestCase
         $this->assertFalse($constraint->evaluate([[]], '', true));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function if_configuration_values_are_invalid_it_matches()
     {
         $constraint = new ConfigurationValuesAreInvalidConstraint(new ConfigurationWithRequiredValue());
@@ -55,9 +48,7 @@ class ConfigurationValuesAreInvalidConstraintTest extends TestCase
         $this->assertTrue($constraint->evaluate([[]], '', true));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function if_configuration_values_are_invalid_it_does_not_match_when_exception_message_is_not_right()
     {
         $constraint = new ConfigurationValuesAreInvalidConstraint(
@@ -68,9 +59,7 @@ class ConfigurationValuesAreInvalidConstraintTest extends TestCase
         $this->assertFalse($constraint->evaluate([[]], '', true));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function if_configuration_values_are_invalid_it_matches_when_exception_message_is_right()
     {
         $constraint = new ConfigurationValuesAreInvalidConstraint(
@@ -81,9 +70,7 @@ class ConfigurationValuesAreInvalidConstraintTest extends TestCase
         $this->assertTrue($constraint->evaluate([[]], '', true));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function if_configuration_values_are_invalid_it_matches_when_exception_message_is_right_according_to_regexp()
     {
         $constraint = new ConfigurationValuesAreInvalidConstraint(
@@ -95,9 +82,7 @@ class ConfigurationValuesAreInvalidConstraintTest extends TestCase
         $this->assertTrue($constraint->evaluate([[]], '', true));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function to_string_returns_a_message()
     {
         $constraint = new ConfigurationValuesAreInvalidConstraint(
@@ -107,9 +92,7 @@ class ConfigurationValuesAreInvalidConstraintTest extends TestCase
         $this->assertSame('is invalid for the given configuration', $constraint->toString());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function to_string_also_mentions_the_expected_exception_message()
     {
         $expectedMessage = 'the expected message';

@@ -4,14 +4,13 @@ namespace Matthias\SymfonyConfigTest\Tests\Partial;
 
 use Matthias\SymfonyConfigTest\Partial\PartialProcessor;
 use Matthias\SymfonyConfigTest\Tests\Partial\Fixtures\ConfigurationStub;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 
 class PartialProcessorTest extends TestCase
 {
-    /**
-     * @test
-     */
+    #[Test]
     public function it_processes_only_the_values_in_the_breadcrumb_path_for_a_given_node()
     {
         $treeBuilder = new TreeBuilder('root');
@@ -56,9 +55,7 @@ class PartialProcessorTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_processes_only_the_values_in_the_given_breadcrumb_path_for_a_given_configuration_instance()
     {
         $partialProcessor = new PartialProcessor();

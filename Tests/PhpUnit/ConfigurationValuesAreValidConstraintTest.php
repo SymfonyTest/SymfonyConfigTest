@@ -5,13 +5,12 @@ namespace Matthias\SymfonyConfigTest\Tests\PhpUnit;
 use Matthias\SymfonyConfigTest\PhpUnit\ConfigurationValuesAreValidConstraint;
 use Matthias\SymfonyConfigTest\Tests\PhpUnit\Fixtures\AlwaysValidConfiguration;
 use Matthias\SymfonyConfigTest\Tests\PhpUnit\Fixtures\ConfigurationWithRequiredValue;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 
 class ConfigurationValuesAreValidConstraintTest extends TestCase
 {
-    /**
-     * @test
-     */
+    #[Test]
     public function if_configuration_values_is_no_array_it_fails()
     {
         $constraint = new ConfigurationValuesAreValidConstraint(new AlwaysValidConfiguration());
@@ -22,9 +21,7 @@ class ConfigurationValuesAreValidConstraintTest extends TestCase
         $constraint->evaluate('not an array');
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function if_configuration_values_is_no_array_of_arrays_it_fails()
     {
         $constraint = new ConfigurationValuesAreValidConstraint(new AlwaysValidConfiguration());
@@ -35,9 +32,7 @@ class ConfigurationValuesAreValidConstraintTest extends TestCase
         $constraint->evaluate(['not an array']);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function if_configuration_values_are_valid_it_matches()
     {
         $constraint = new ConfigurationValuesAreValidConstraint(new AlwaysValidConfiguration());
@@ -45,9 +40,7 @@ class ConfigurationValuesAreValidConstraintTest extends TestCase
         $this->assertTrue($constraint->evaluate([[]], '', true));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function if_configuration_values_are_invalid_it_does_not_match()
     {
         $constraint = new ConfigurationValuesAreValidConstraint(new ConfigurationWithRequiredValue());
@@ -55,9 +48,7 @@ class ConfigurationValuesAreValidConstraintTest extends TestCase
         $this->assertFalse($constraint->evaluate([[]], '', true));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function to_string_returns_a_message()
     {
         $constraint = new ConfigurationValuesAreValidConstraint(new AlwaysValidConfiguration());
