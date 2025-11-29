@@ -12,7 +12,9 @@ validity of the resulting config node tree, this library provides a PHPUnit test
 
 Using Composer:
 
-    composer require --dev matthiasnoback/symfony-config-test
+```bash
+composer require --dev matthiasnoback/symfony-config-test
+```
 
 ## Usage
 
@@ -22,9 +24,9 @@ Then implement ``getConfiguration()``:
 ```php
 <?php
 
+use App\Configuration;
 use Matthias\SymfonyConfigTest\PhpUnit\ConfigurationTestCaseTrait;
 use PHPUnit\Framework\TestCase;
-use App\Configuration;
 
 class ConfigurationTest extends TestCase
 {
@@ -75,15 +77,14 @@ When you provide an empty array as the value for this configuration, you would e
 <?php
 
 use Matthias\SymfonyConfigTest\PhpUnit\ConfigurationTestCaseTrait;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 
 class ConfigurationTest extends TestCase
 {
     use ConfigurationTestCaseTrait;
 
-    /**
-     * @test
-     */
+    #[Test]
     public function values_are_invalid_if_required_value_is_not_provided(): void
     {
         $this->assertConfigurationIsInvalid(
@@ -104,15 +105,14 @@ You may also want to verify that after processing an array of configuration valu
 <?php
 
 use Matthias\SymfonyConfigTest\PhpUnit\ConfigurationTestCaseTrait;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 
 class ConfigurationTest extends TestCase
 {
     use ConfigurationTestCaseTrait;
 
-    /**
-     * @test
-     */
+    #[Test]
     public function processed_value_contains_required_value(): void
     {
         $this->assertProcessedConfigurationEquals([
@@ -177,9 +177,7 @@ If you want to test, for instance, only the `array_node_1` branch from the examp
 provide `array_node_1` as the argument for the `$breadcrumbPath` parameter of the test helper functions, for example:
 
 ```php
-/**
- * @test
- */
+#[Test]
 public function processed_configuration_for_array_node_1(): void
 {
     $this->assertProcessedConfigurationEquals(
@@ -244,9 +242,7 @@ If you want to test whether `default_value` is set to `foobar` by default, but d
 requirements on `required_value` node, you can define its path as `array_node.*.default_value`, for example:
 
 ```php
-/**
- * @test
- */
+#[Test]
 public function processed_configuration_for_array_node_1(): void
 {
     $this->assertProcessedConfigurationEquals(

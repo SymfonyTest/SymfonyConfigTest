@@ -15,29 +15,34 @@ jobs:
                     - '8.2'
                     - '8.3'
                     - '8.4'
+                    - '8.5'
                 dependency:
                     - ''
                 symfony:
                     - '5.4.*'
                     - '6.4.*'
                     - '7.3.*'
+                    - '7.4.*'
+                    - '8.0.*'
                 include:
                     - php: '8.1'
                       symfony: '5.4.*'
                       dependency: 'lowest'
-                    - php: '8.4'
-                      symfony: '7.4.*@dev'
-                      dependency: ''
-                    - php: '8.4'
-                      symfony: '8.0.*@dev'
-                      dependency: ''
                 exclude:
                     - php: '8.1'
                       symfony: '7.3.*'
+                    - php: '8.1'
+                      symfony: '7.4.*'
+                    - php: '8.1'
+                      symfony: '8.0.*'
+                    - php: '8.2'
+                      symfony: '8.0.*'
+                    - php: '8.3'
+                      symfony: '8.0.*'
             fail-fast: false
         steps:
             - name: Checkout
-              uses: actions/checkout@v4
+              uses: actions/checkout@v6
 
             - name: Setup PHP
               uses: shivammathur/setup-php@v2
