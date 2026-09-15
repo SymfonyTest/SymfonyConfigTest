@@ -10,23 +10,14 @@ use Symfony\Component\Config\Definition\PrototypedArrayNode;
 
 class PartialNode
 {
-    /**
-     * @var \ReflectionProperty
-     */
-    private static $nodeChildrenProperty;
-
-    /**
-     * @var \ReflectionProperty
-     */
-    private static $nodePrototypeProperty;
+    private static ?\ReflectionProperty $nodeChildrenProperty = null;
 
     /**
      * Provide an ArrayNode instance (e.g. the root node created by a TreeBuilder) and a path that is relevant to you,
      * e.g. "dbal.connections": this will strip every node that is not contained in the given path (e.g. the "orm" node
      * would be removed entirely.
      *
-     * @param ArrayNode $node
-     * @param string    $breadcrumbPath
+     * @param string|null $breadcrumbPath
      */
     public static function excludeEverythingNotInBreadcrumbPath(ArrayNode $node, $breadcrumbPath)
     {
@@ -40,7 +31,10 @@ class PartialNode
     }
 
     /**
-     * @param array $path
+     * @param list<string> $path
+     *
+     * @throws ChildIsNotAnArrayNode if the child node is not an array node
+     * @throws UndefinedChildNode if the node does not have a child in the given path
      */
     public static function excludeEverythingNotInPath(ArrayNode $node, array $path = [])
     {
@@ -71,15 +65,14 @@ class PartialNode
     }
 
     /**
-     * @param ArrayNode $node
-     * @param string    $childNodeName
+     * @param non-empty-string $childNodeName
      *
-     * @return NodeInterface
+     * @throws UndefinedChildNode if the node does not have a child with the given name
      */
-    private static function childNode(ArrayNode $node, $childNodeName)
+    private static function childNode(ArrayNode $node, string $childNodeName): NodeInterface
     {
         if ($node instanceof PrototypedArrayNode && '*' === $childNodeName) {
-            return self::nodePrototypeProperty()->getValue($node);
+            return $node->getPrototype();
         }
 
         $children = self::nodeChildrenProperty()->getValue($node);
@@ -94,25 +87,11 @@ class PartialNode
         return $children[$childNodeName];
     }
 
-    /**
-     * @return \ReflectionProperty
-     */
-    private static function nodeChildrenProperty()
+    private static function nodeChildrenProperty(): \ReflectionProperty
     {
         return self::$nodeChildrenProperty ??= new \ReflectionProperty(
             ArrayNode::class,
             'children'
-        );
-    }
-
-    /**
-     * @return \ReflectionProperty
-     */
-    private static function nodePrototypeProperty()
-    {
-        return self::$nodePrototypeProperty ??= new \ReflectionProperty(
-            PrototypedArrayNode::class,
-            'prototype'
         );
     }
 }

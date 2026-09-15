@@ -7,8 +7,11 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
 
 class ProcessedConfigurationEqualsConstraint extends AbstractConfigurationConstraint
 {
-    private $configurationValues;
+    private array $configurationValues;
 
+    /**
+     * @param string|null $breadcrumbPath
+     */
     public function __construct(
         ConfigurationInterface $configuration,
         array $configurationValues,
@@ -24,9 +27,7 @@ class ProcessedConfigurationEqualsConstraint extends AbstractConfigurationConstr
     {
         $processedConfiguration = $this->processConfiguration($this->configurationValues);
 
-        $constraint = new IsEqual($other);
-
-        return $constraint->evaluate($processedConfiguration, '', $returnResult);
+        return (new IsEqual($other))->evaluate($processedConfiguration, '', $returnResult);
     }
 
     public function toString(): string

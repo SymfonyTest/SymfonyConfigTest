@@ -74,3 +74,43 @@ jobs:
 
             - name: Run tests
               run: vendor/bin/phpunit
+
+    phpstan:
+        name: PHPStan PHP ${{ matrix.php }} (Symfony ${{ matrix.symfony }})
+        runs-on: ubuntu-latest
+        strategy:
+          matrix:
+            php:
+              - '8.5'
+            symfony:
+              - '8.1.*'
+
+        steps:
+          - name: Checkout
+            uses: actions/checkout@v4
+
+          - name: Setup PHP
+            uses: shivammathur/setup-php@v2
+            with:
+              php-version: ${{ matrix.php }}
+              tools: flex
+              coverage: none
+
+          - name: Get Composer Cache Directory
+            id: composer-cache
+            run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
+
+          - name: Cache dependencies
+            uses: actions/cache@v4
+            with:
+              path: ${{ steps.composer-cache.outputs.dir }}
+              key: ${{ matrix.php }}-composer-${{ hashFiles('**/composer.json') }}
+              restore-keys: ${{ matrix.php }}-composer-
+
+          - name: Update project dependencies
+            run: composer update --no-progress --ansi --prefer-stable
+            env:
+              SYMFONY_REQUIRE: ${{ matrix.symfony }}
+
+          - name: Run PHPStan
+            run: vendor/bin/phpstan analyze --error-format=github

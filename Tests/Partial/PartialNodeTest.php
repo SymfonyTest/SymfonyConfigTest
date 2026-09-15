@@ -30,8 +30,8 @@ class PartialNodeTest extends TestCase
                     ->children()
                         ->scalarNode('node_2_scalar_node');
 
+        /** @var ArrayNode $node */
         $node = $treeBuilder->buildTree();
-        /* @var ArrayNode $node */
 
         PartialNode::excludeEverythingNotInPath($node, ['node_2']);
 
@@ -65,8 +65,8 @@ class PartialNodeTest extends TestCase
                     ->children()
                         ->scalarNode('scalar_node');
 
+        /** @var ArrayNode $node */
         $node = $treeBuilder->buildTree();
-        /* @var ArrayNode $node */
 
         PartialNode::excludeEverythingNotInPath($node, ['node_1', 'node_1_b']);
 
@@ -91,8 +91,8 @@ class PartialNodeTest extends TestCase
                 ->end()
                 ->scalarNode('node_3');
 
+        /** @var ArrayNode $node */
         $node = $treeBuilder->buildTree();
-        /* @var ArrayNode $node */
 
         PartialNode::excludeEverythingNotInPath($node, ['node_3']);
 
@@ -141,7 +141,13 @@ class PartialNodeTest extends TestCase
         $node = $treeBuilder->buildTree();
 
         $this->expectException(UndefinedChildNode::class);
-        $this->expectExceptionMessage('Undefined child node "non_existing_node" (the part of the path that was successful: "root.sub_node")');
+
+        /** @phpstan-ignore function.alreadyNarrowedType (compat layer for PHPUnit 13.2 deprecations) */
+        if (method_exists($this, 'expectExceptionMessageIsOrContains')) {
+            $this->expectExceptionMessageIsOrContains('Undefined child node "non_existing_node" (the part of the path that was successful: "root.sub_node")');
+        } else {
+            $this->expectExceptionMessage('Undefined child node "non_existing_node" (the part of the path that was successful: "root.sub_node")');
+        }
 
         PartialNode::excludeEverythingNotInPath($node, ['sub_node', 'non_existing_node']);
     }
@@ -160,15 +166,20 @@ class PartialNodeTest extends TestCase
         $node = $treeBuilder->buildTree();
 
         $this->expectException(ChildIsNotAnArrayNode::class);
-        $this->expectExceptionMessage('Child node "scalar_node" is not an array node (current path: "root.sub_node")');
+
+        /** @phpstan-ignore function.alreadyNarrowedType (compat layer for PHPUnit 13.2 deprecations) */
+        if (method_exists($this, 'expectExceptionMessageIsOrContains')) {
+            $this->expectExceptionMessageIsOrContains('Child node "scalar_node" is not an array node (current path: "root.sub_node")');
+        } else {
+            $this->expectExceptionMessage('Child node "scalar_node" is not an array node (current path: "root.sub_node")');
+        }
 
         PartialNode::excludeEverythingNotInPath($node, ['sub_node', 'scalar_node', 'extra_node']);
     }
 
-    private function nodeOnlyHasChild(ArrayNode $node, $nodeName)
+    private function nodeOnlyHasChild(ArrayNode $node, string $nodeName)
     {
-        $property = new \ReflectionProperty($node, 'children');
-        $children = $property->getValue($node);
+        $children = (new \ReflectionProperty($node, 'children'))->getValue($node);
 
         $this->assertCount(1, $children);
         $firstChild = reset($children);

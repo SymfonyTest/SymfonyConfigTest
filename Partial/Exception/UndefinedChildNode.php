@@ -6,6 +6,9 @@ use Symfony\Component\Config\Definition\NodeInterface;
 
 class UndefinedChildNode extends InvalidNodeNavigation
 {
+    /**
+     * @param non-empty-string $childNodeName
+     */
     public function __construct(NodeInterface $parentNode, $childNodeName)
     {
         parent::__construct(

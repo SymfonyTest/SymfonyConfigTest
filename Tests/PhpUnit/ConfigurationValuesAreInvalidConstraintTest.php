@@ -17,7 +17,13 @@ class ConfigurationValuesAreInvalidConstraintTest extends TestCase
         $constraint = new ConfigurationValuesAreInvalidConstraint(new AlwaysValidConfiguration());
 
         $this->expectException(\InvalidArgumentException::class);
-        $this->expectExceptionMessage('array');
+
+        /** @phpstan-ignore function.alreadyNarrowedType (compat layer for PHPUnit 13.2 deprecations) */
+        if (method_exists($this, 'expectExceptionMessageIsOrContains')) {
+            $this->expectExceptionMessageIsOrContains('array');
+        } else {
+            $this->expectExceptionMessage('array');
+        }
 
         $constraint->evaluate('not an array');
     }
@@ -28,7 +34,13 @@ class ConfigurationValuesAreInvalidConstraintTest extends TestCase
         $constraint = new ConfigurationValuesAreInvalidConstraint(new AlwaysValidConfiguration());
 
         $this->expectException(\InvalidArgumentException::class);
-        $this->expectExceptionMessage('array');
+
+        /** @phpstan-ignore function.alreadyNarrowedType (compat layer for PHPUnit 13.2 deprecations) */
+        if (method_exists($this, 'expectExceptionMessageIsOrContains')) {
+            $this->expectExceptionMessageIsOrContains('array');
+        } else {
+            $this->expectExceptionMessage('array');
+        }
 
         $constraint->evaluate(['not an array']);
     }
