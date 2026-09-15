@@ -6,6 +6,9 @@ use Symfony\Component\Config\Definition\BaseNode;
 
 class ChildIsNotAnArrayNode extends InvalidNodeNavigation
 {
+    /**
+     * @param non-empty-string $nodeName
+     */
     public function __construct(BaseNode $parentNode, $nodeName)
     {
         parent::__construct(

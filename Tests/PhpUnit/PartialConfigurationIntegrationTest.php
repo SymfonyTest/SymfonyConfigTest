@@ -33,7 +33,13 @@ class PartialConfigurationIntegrationTest extends TestCase
     public function it_fails_when_a_configuration_is_valid_when_it_should_have_been_invalid()
     {
         $this->expectException(ExpectationFailedException::class);
-        $this->expectExceptionMessage('invalid');
+
+        /** @phpstan-ignore function.alreadyNarrowedType (compat layer for PHPUnit 13.2 deprecations) */
+        if (method_exists($this, 'expectExceptionMessageIsOrContains')) {
+            $this->expectExceptionMessageIsOrContains('invalid');
+        } else {
+            $this->expectExceptionMessage('invalid');
+        }
 
         $this->assertPartialConfigurationIsInvalid(
             [
@@ -66,7 +72,13 @@ class PartialConfigurationIntegrationTest extends TestCase
     public function it_fails_when_a_configuration_is_invalid_when_it_should_have_been_valid()
     {
         $this->expectException(ExpectationFailedException::class);
-        $this->expectExceptionMessage('valid');
+
+        /** @phpstan-ignore function.alreadyNarrowedType (compat layer for PHPUnit 13.2 deprecations) */
+        if (method_exists($this, 'expectExceptionMessageIsOrContains')) {
+            $this->expectExceptionMessageIsOrContains('valid');
+        } else {
+            $this->expectExceptionMessage('valid');
+        }
 
         $this->assertConfigurationIsValid(
             [
@@ -106,7 +118,14 @@ class PartialConfigurationIntegrationTest extends TestCase
         $value = 'some value';
 
         $this->expectException(ExpectationFailedException::class);
-        $this->expectExceptionMessage('equal');
+
+        /** @phpstan-ignore function.alreadyNarrowedType (compat layer for PHPUnit 13.2 deprecations) */
+        if (method_exists($this, 'expectExceptionMessageIsOrContains')) {
+            $this->expectExceptionMessageIsOrContains('equal');
+        } else {
+            $this->expectExceptionMessage('equal');
+        }
+
         $this->assertProcessedConfigurationEquals(
             [
                 [

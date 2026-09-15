@@ -2,16 +2,10 @@
 
 namespace Matthias\SymfonyConfigTest\PhpUnit;
 
-use Symfony\Component\Config\Definition\ConfigurationInterface;
 use Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
 
 class ConfigurationValuesAreValidConstraint extends AbstractConfigurationConstraint
 {
-    public function __construct(ConfigurationInterface $configuration, $breadcrumbPath = null)
-    {
-        parent::__construct($configuration, $breadcrumbPath);
-    }
-
     public function evaluate($other, $description = '', $returnResult = false): ?bool
     {
         $this->validateConfigurationValuesArray($other);

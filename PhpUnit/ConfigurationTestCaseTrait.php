@@ -3,10 +3,11 @@
 namespace Matthias\SymfonyConfigTest\PhpUnit;
 
 use PHPUnit\Framework\TestCase;
+use Symfony\Component\Config\Definition\ConfigurationInterface;
 
 /**
  * Add this trait to your Test Case to add the ability of testing your configuration
- * which should implement Symfony\Component\Config\Definition\ConfigurationInterface.
+ * which should implement {@see ConfigurationInterface}.
  */
 trait ConfigurationTestCaseTrait
 {
@@ -14,7 +15,7 @@ trait ConfigurationTestCaseTrait
      * Return the instance of ConfigurationInterface that should be used by the
      * Configuration-specific assertions in this test-case.
      *
-     * @return \Symfony\Component\Config\Definition\ConfigurationInterface
+     * @return ConfigurationInterface
      */
     abstract protected function getConfiguration();
 
@@ -29,6 +30,8 @@ trait ConfigurationTestCaseTrait
      * @param array       $configurationValues
      * @param string|null $expectedMessage
      * @param bool        $useRegExp
+     *
+     * @return void
      */
     protected function assertConfigurationIsInvalid(array $configurationValues, $expectedMessage = null, $useRegExp = false)
     {
@@ -51,9 +54,11 @@ trait ConfigurationTestCaseTrait
      * to match the exception message using a regular expression.
      *
      * @param array       $configurationValues
-     * @param string      $breadcrumbPath      The path that should be validated, e.g. "doctrine.orm"
+     * @param string|null $breadcrumbPath      The path that should be validated, e.g. "doctrine.orm"
      * @param string|null $expectedMessage
      * @param bool        $useRegExp
+     *
+     * @return void
      */
     protected function assertPartialConfigurationIsInvalid(
         array $configurationValues,
@@ -79,6 +84,8 @@ trait ConfigurationTestCaseTrait
      *
      * @param array       $configurationValues
      * @param string|null $breadcrumbPath
+     *
+     * @return void
      */
     protected function assertConfigurationIsValid(array $configurationValues, $breadcrumbPath = null)
     {
@@ -99,6 +106,8 @@ trait ConfigurationTestCaseTrait
      * @param array       $configurationValues
      * @param array       $expectedProcessedConfiguration
      * @param string|null $breadcrumbPath
+     *
+     * @return void
      */
     protected function assertProcessedConfigurationEquals(
         array $configurationValues,
