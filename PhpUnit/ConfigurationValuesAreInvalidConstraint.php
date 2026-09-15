@@ -65,7 +65,7 @@ class ConfigurationValuesAreInvalidConstraint extends AbstractConfigurationConst
         }
 
         return $this->createPhpUnitConstraint()
-            ->evaluate($exception, $description, $returnResult);
+            ->evaluate($exception->getMessage(), $description, $returnResult);
     }
 
     private function createPhpUnitConstraint()

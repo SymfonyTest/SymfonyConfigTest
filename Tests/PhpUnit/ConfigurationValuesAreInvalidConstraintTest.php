@@ -6,6 +6,7 @@ use Matthias\SymfonyConfigTest\PhpUnit\ConfigurationValuesAreInvalidConstraint;
 use Matthias\SymfonyConfigTest\Tests\PhpUnit\Fixtures\AlwaysValidConfiguration;
 use Matthias\SymfonyConfigTest\Tests\PhpUnit\Fixtures\ConfigurationWithRequiredValue;
 use PHPUnit\Framework\Attributes\Test;
+use PHPUnit\Framework\ExpectationFailedException;
 use PHPUnit\Framework\TestCase;
 
 class ConfigurationValuesAreInvalidConstraintTest extends TestCase
@@ -80,6 +81,25 @@ class ConfigurationValuesAreInvalidConstraintTest extends TestCase
         );
 
         $this->assertTrue($constraint->evaluate([[]], '', true));
+    }
+
+    #[Test]
+    public function the_failure_message_contains_the_actual_exception_message()
+    {
+        $constraint = new ConfigurationValuesAreInvalidConstraint(
+            new ConfigurationWithRequiredValue(),
+            'expected message which will not be part of the actual message'
+        );
+
+        try {
+            $constraint->evaluate([[]]);
+        } catch (ExpectationFailedException $exception) {
+            $this->assertStringContainsString('required_value', $exception->getMessage());
+
+            return;
+        }
+
+        $this->fail('Expected an ExpectationFailedException to be thrown');
     }
 
     #[Test]
